@@ -1,0 +1,315 @@
+{
+  "common": {
+    "bookNow": "JETZT BUCHEN",
+    "logIn": "ANMELDEN",
+    "logOut": "Abmelden",
+    "closeMenu": "Menü schließen",
+    "openMenu": "Menü öffnen",
+    "seeAll": "Alle anzeigen",
+    "perDay": "/Tag",
+    "seats": "Sitze",
+    "noResults": "Keine Ergebnisse verfügbar"
+  },
+  "navigation": {
+    "aboutUs": "Über Uns",
+    "contactUs": "Kontakt"
+  },
+  "hero": {
+    "title": {
+      "part1": "Finden Sie Ihr",
+      "part2": "Perfektes Fahrzeug",
+      "part3": "– Einfach, Schnell, Bezahlbar"
+    },
+    "description": "Durchsuchen Sie hoch bewertete Mietwagen, nutzen Sie exklusive Angebote und fahren Sie mit Vertrauen los. Wählen Sie von Economy bis Luxus — maßgeschneidert für Ihre Reise und Ihr Budget.",
+    "form": {
+      "pickupLocation": {
+        "label": "Abholort",
+        "placeholder": "Standort suchen",
+        "error": "Abholort ist erforderlich"
+      },
+      "pickupDate": {
+        "label": "Abholdatum",
+        "error": "Abholdatum ist erforderlich"
+      },
+      "dropoffLocation": {
+        "label": "Rückgabeort",
+        "placeholder": "Standort suchen",
+        "error": "Rückgabeort ist erforderlich"
+      },
+      "dropoffDate": {
+        "label": "Rückgabedatum",
+        "error": "Rückgabedatum ist erforderlich"
+      },
+      "submitButton": "Fahrzeug finden"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Willkommen zurück!",
+      "subtitle": "Melden Sie sich an, um fortzufahren",
+      "email": {
+        "label": "E-Mail-Adresse",
+        "placeholder": "Geben Sie Ihre E-Mail ein"
+      },
+      "password": {
+        "label": "Passwort",
+        "placeholder": "8+ Zeichen"
+      },
+      "forgotPassword": "Passwort vergessen?",
+      "submitButton": "Anmelden",
+      "or": "Oder",
+      "noAccount": "Noch kein Konto?",
+      "getStarted": "Jetzt starten"
+    },
+    "signup": {
+      "title": "Neues Konto erstellen",
+      "subtitle": "Holen Sie sich jetzt Ihr kostenloses Konto",
+      "firstName": {
+        "placeholder": "Vorname"
+      },
+      "lastName": {
+        "placeholder": "Nachname"
+      },
+      "email": {
+        "placeholder": "E-Mail-Adresse"
+      },
+      "password": {
+        "placeholder": "Neues Passwort"
+      },
+      "phone": {
+        "placeholder": "Geben Sie Ihre Nummer ein",
+        "countryCode": "+49"
+      },
+      "address": {
+        "label": "Adresse",
+        "placeholder": "Hier eingeben"
+      },
+      "gender": {
+        "label": "Geschlecht:",
+        "male": "Männlich",
+        "female": "Weiblich"
+      },
+      "terms": {
+        "text": "Mit der Registrierung stimme ich den",
+        "terms": "Nutzungsbedingungen",
+        "and": "und der",
+        "privacy": "Datenschutzerklärung"
+      },
+      "submitButton": "Registrieren",
+      "or": "Oder",
+      "hasAccount": "Haben Sie bereits ein Konto?",
+      "login": "Anmelden"
+    },
+    "errors": {
+      "loginFailed": "Anmeldung mit E-Mail/Passwort fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "socialLoginFailed": "Anmeldung mit {provider} fehlgeschlagen. {error}",
+      "unexpectedError": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+    }
+  },
+  "user": {
+    "save": "Führerschein",
+    "contactSupport": {
+      "title": "Contact Support",
+      "imageAlt": "Contact Support Illustration",
+      "phone": "+49 3456 789",
+      "email": "demo@gmail.com",
+      "address": {
+        "line1": "132 Dartmouth Street Boston,",
+        "line2": "Massachusetts 02156 United States"
+      }
+    },
+     "sidebar": {
+    "dashboard": "Dashboard",
+    "myProfile": "Mein Profil",
+    "myBookings": "Meine Buchungen",
+    "myWishlist": "Meine Wunschliste",
+    "wallet": "Brieftasche",
+    "myReviews": "Meine Bewertungen",
+    "myComplaints": "Meine Beschwerden",
+    "contactSupport": "Kontakt-Support",
+    "logoutConfirmation": "Bist du sicher, dass du dich abmelden möchtest?",
+
+    "logout": "Abmelden"
+  },
+    "bookingDetails": {
+      "title": "Buchungsdetails",
+      "details": "Buchungsinformationen",
+      "statusConfirmed": "Bestätigt",
+      "car": "Auto",
+      "startTime": "Startdatum & Uhrzeit",
+      "endTime": "Enddatum & Uhrzeit",
+      "pickup": "Abholort",
+      "dropoff": "Rückgabeort",
+      "paymentDetails": "Zahlungsdetails",
+      "bookingId": "Buchungsnummer",
+      "transactionId": "Transaktionsnummer",
+      "paymentMethod": "Zahlungsmethode",
+      "priceBreakdown": "Preisübersicht",
+      "baseFare": "Grundgebühr ({{days}} Tage, {{km}} KM)",
+      "extraKms": "Zusätzliche KM ({{km}} KM)",
+      "discount": "Rabatt ({{percentage}}%)",
+      "taxes": "Steuern",
+      "totalAmount": "Gesamtbetrag",
+      "downloadInvoice": "Rechnung herunterladen"
+    },
+    "profile": {
+      "account": {
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "email": "E-Mail",
+        "mobileNo": "Telefonnummer",
+        "address": "Adresse",
+        "gender": {
+          "male": "Männlich",
+          "female": "Weiblich"
+        }
+      },
+      "submitComplaint": {
+        "title": "Beschwerde einreichen",
+        "name": "Name",
+        "email": "E-Mail",
+        "category": "Kategorie",
+        "selectCategory": "Kategorie auswählen",
+        "uploadLabel": "Bild hochladen (optional)",
+        "uploadHint": "Nur JPG, PNG und MP4-Dateien werden unterstützt",
+        "uploadButton": "Bilder hochladen (falls vorhanden)",
+        "comments": "Kommentare hinzufügen",
+        "commentsPlaceholder": "Bitte geben Sie Ihre Kommentare ein",
+        "submit": "Einreichen",
+        "submitSuccess": "Beschwerde erfolgreich eingereicht",
+        "submitThankYou": "Danke für Ihre Nachricht. Unser Support-Team wird sich in Kürze bei Ihnen melden.",
+        "close": "Schließen"
+      },
+      "licenseManagement": {
+        "licenseFront": "Führerschein (Vorderseite)",
+        "licenseBack": "Führerschein (Rückseite)",
+        "licenseNumber": "Führerscheinnummer",
+        "licenseExpiry": "Ablaufdatum",
+        "uploadText": "Klicken zum Hochladen oder per Drag & Drop ablegen",
+        "dateOfBirth": "Geburtsdatum",
+        "issueDate": "Ausstellungsdatum",
+        "documentSupported": "Unterstützte Formate: PDF, JPG, PNG (max. 10 MB)"
+      },
+      "rentalHistory": {
+        "title": "Mietverlauf",
+        "upcomingBooking": "Bevorstehende Buchung",
+        "pastBooking": "Vergangene Buchung",
+        "bookingDate": "Buchungsdatum",
+        "tripStartDateAndTime": "Startdatum & -uhrzeit der Fahrt",
+        "tripEndDateAndTime": "Enddatum & -uhrzeit der Fahrt",
+        "amountPaid": "Bezahlter Betrag",
+        "rateExperience": "Erfahrung bewerten"
+      }
+    },
+    "menu": {
+      "accountDetails": "Kontodetails",
+      "licenseManagement": "Lizenzverwaltung",
+      "rentalHistory": "Mietverlauf",
+      "feedbackSection": "Feedbackbereich",
+      "rateRental": "Miete bewerten",
+      "submitComplaint": "Beschwerde einreichen",
+      "contactSupport": "Support kontaktieren"
+    }
+  },
+  "carRental": {
+    "title": "Top Autovermietungen – Handverlesen für jede Reise",
+    "description": "Entdecken Sie unsere ausgewählte Kollektion. Ob Sie Wert auf Wirtschaftlichkeit oder Luxus legen – wir haben das passende Fahrzeug für Sie.",
+    "categories": {
+      "economy": "Economy Fahrzeuge",
+      "popular": "Beliebte Fahrzeuge",
+      "family": "Familienfahrzeuge",
+      "luxury": "Luxusfahrzeuge",
+      "offRoad": "Geländefahrzeuge"
+    },
+    "noCarsAvailable": "Keine Fahrzeuge in dieser Kategorie verfügbar.",
+    "seeAllCars": "Alle Fahrzeuge anzeigen →"
+  },
+  "testimonials": {
+    "title": "Das sagen unsere zufriedenen Kunden",
+    "subtitle": "Echte Geschichten. Echte Reisen",
+    "accessibility": {
+      "goToTestimonial": "Zum Testimonial"
+    }
+  },
+  "footer": {
+    "company": {
+      "title": "Unternehmen",
+      "aboutUs": "Über uns"
+    },
+    "services": {
+      "title": "Dienstleistungen",
+      "carRentals": "Autovermietung",
+      "hourlyRentals": "Stundenmiete",
+      "luxuryCarHire": "Luxuswagen mieten",
+      "outstationTravel": "Auswärtige Reisen"
+    },
+    "support": {
+      "title": "Support",
+      "contactUs": "Kontakt",
+      "cancellationPolicy": "Stornierungsbedingungen",
+      "termsConditions": "Allgemeine Geschäftsbedingungen",
+      "privacyPolicy": "Datenschutzerklärung"
+    },
+    "copyright": {
+      "text": "© 2025 Mr.Rent – Alle Rechte vorbehalten – Entwickelt von",
+      "poweredBy": "LOOY.io"
+    },
+    "social": {
+      "facebook": "Besuchen Sie unsere Facebook-Seite",
+      "twitter": "Besuchen Sie unsere Twitter-Seite",
+      "instagram": "Besuchen Sie unsere Instagram-Seite",
+      "linkedin": "Besuchen Sie unsere LinkedIn-Seite",
+      "whatsapp": "Besuchen Sie unsere WhatsApp-Seite"
+    }
+  },
+  "accessibility": {
+    "home": "MR RENT Startseite",
+    "logo": "MR RENT Logo",
+    "carImage": "Fahrzeugbild",
+    "manualGear": "Schaltgetriebe-Symbol",
+    "userAvatar": "Benutzer-Avatar"
+  },
+  "newsletter": {
+    "title": "Bleiben Sie am Steuer – Machen Sie jede Fahrt zählt!",
+    "description": "Melden Sie sich für unseren Newsletter an, um die neuesten Updates zu neuen Automodellen und Mietstandorten direkt in Ihren Posteingang zu erhalten.",
+    "emailPlaceholder": "E-Mail eingeben",
+    "subscribeButton": "ABONNIEREN"
+  },
+  "steps": {
+    "title": "Buchen Sie Ihr Auto in 4 einfachen Schritten",
+    "subtitle": "Einfach. Schnell. Stressfrei — von der Suche bis zum Fahren."
+  },
+  "confidence": {
+    "title": "Fahren Sie mit Vertrauen – Wählen Sie das Beste",
+    "description": "Erleben Sie unvergleichliche Autovermietungsdienste mit einer Flotte, der Sie vertrauen können, Preisen, die Sie lieben, und Support, auf den Sie sich verlassen können.",
+    "features": {
+      "fleet": {
+        "title": "Große Fahrzeugauswahl",
+        "description": "Von Budget-Fahrzeugen bis Premium-Fahrzeugen — alles unter einem Dach."
+      },
+      "pricing": {
+        "title": "Transparente Preise",
+        "description": "Keine versteckten Kosten. Zahlen Sie, was Sie sehen."
+      },
+      "support": {
+        "title": "24/7 Kundenservice",
+        "description": "Unterstützung in jedem Schritt Ihrer Reise."
+      }
+    }
+  },
+  "contactUs": {
+    "subtitle": "Fragen oder Anmerkungen?"
+  },
+  "about": {
+    "breadcrumb": "Über Uns",
+    "sectionLabel": "Über uns",
+    "heading": "Wo jede Fahrt mit Exzellenz beginnt!",
+    "description": "Bei MR. Rent sind wir der Meinung, dass sich das Mieten eines Autos so reibungslos anfühlen sollte wie das Fahren. Deshalb bieten wir eine kuratierte Flotte von Economy- und Luxusfahrzeugen, sofortige Buchung und keine versteckten Gebühren – gestützt durch persönlichen Service und rund um die Uhr Unterstützung. Ob Pendeln, Entdecken oder stilvoll Ankommen – wir bringen Sie voran.",
+    "features": {
+      "premiumBudget": "Premium- & Budget-Fahrzeuge",
+      "sanitizedVerified": "Komplett desinfiziert & verifiziert",
+      "transparentPricing": "Transparente Preise",
+      "assistance": "24/7 Unterstützung"
+    }
+  }
+}

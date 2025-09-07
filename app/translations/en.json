@@ -1,0 +1,314 @@
+{
+  "common": {
+    "bookNow": "BOOK NOW",
+    "logIn": "LOGIN",
+    "logOut": "LOGOUT",
+    "closeMenu": "Close menu",
+    "openMenu": "Open menu",
+    "seeAll": "See all",
+    "perDay": "/day",
+    "seats": "Seats",
+    "noResults": "No results available"
+  },
+  "navigation": {
+    "aboutUs": "About Us",
+    "contactUs": "Contact Us"
+  },
+  "hero": {
+    "title": {
+      "part1": "Find Your",
+      "part2": "Perfect Ride",
+      "part3": "– Easy, Fast, Affordable"
+    },
+    "description": "Browse high-rated rental cars, unlock exclusive offers, and drive with confidence. Choose from economy to luxury — tailored for your travel and budget.",
+    "form": {
+      "pickupLocation": {
+        "label": "Pickup Location",
+        "placeholder": "Search location",
+        "error": "Pickup location is required"
+      },
+      "pickupDate": {
+        "label": "Pickup Date",
+        "error": "Pickup date is required"
+      },
+      "dropoffLocation": {
+        "label": "Dropoff Location",
+        "placeholder": "Search location",
+        "error": "Dropoff location is required"
+      },
+      "dropoffDate": {
+        "label": "Dropoff Date",
+        "error": "Dropoff date is required"
+      },
+      "submitButton": "Find a Vehicle"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back!",
+      "subtitle": "Sign in to continue with us",
+      "email": {
+        "label": "Email address",
+        "placeholder": "Enter your email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "8+ characters"
+      },
+      "forgotPassword": "Forgot password?",
+      "submitButton": "Login",
+      "or": "Or",
+      "noAccount": "Don't have an account?",
+      "getStarted": "Get Started"
+    },
+    "signup": {
+      "title": "Create New Account",
+      "subtitle": "Get your free account now",
+      "firstName": {
+        "placeholder": "First Name"
+      },
+      "lastName": {
+        "placeholder": "Last Name"
+      },
+      "email": {
+        "placeholder": "Email address"
+      },
+      "password": {
+        "placeholder": "New Password"
+      },
+      "phone": {
+        "placeholder": "Enter your number",
+        "countryCode": "+49"
+      },
+      "address": {
+        "label": "Address",
+        "placeholder": "Enter your address"
+      },
+      "gender": {
+        "label": "Gender:",
+        "male": "Male",
+        "female": "Female"
+      },
+      "terms": {
+        "text": "By signing up, I agree to",
+        "terms": "terms of use",
+        "and": "&",
+        "privacy": "privacy policy"
+      },
+      "submitButton": "Sign Up",
+      "or": "Or",
+      "hasAccount": "Already have an account?",
+      "login": "Login"
+    },
+    "errors": {
+      "loginFailed": "Failed to sign in with email/password. Please try again.",
+      "socialLoginFailed": "Failed to sign in with {provider}. {error}",
+      "unexpectedError": "An unexpected error occurred. Please try again."
+    }
+  },
+  "user": {
+    "save": "License",
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "myProfile": "My Profile",
+      "myBookings": "My Bookings",
+      "myWishlist": "My Wishlist",
+      "wallet": "Wallet",
+      "myReviews": "My Reviews",
+      "myComplaints": "My Complaints",
+      "contactSupport": "Contact Support",
+      "logoutConfirmation": "Are You Sure, You Want To Logout?",
+      "logout": "Logout"
+    },
+    "contactSupport": {
+      "title": "Contact Support",
+      "imageAlt": "Contact Support Illustration",
+      "phone": "+49 3456 789",
+      "email": "demo@gmail.com",
+      "address": {
+        "line1": "132 Dartmouth Street Boston,",
+        "line2": "Massachusetts 02156 United States"
+      }
+    },
+    "bookingDetails": {
+      "title": "Booking Details",
+      "details": "Booking Information",
+      "statusConfirmed": "Confirmed",
+      "car": "Car",
+      "startTime": "Start Date & Time",
+      "endTime": "End Date & Time",
+      "pickup": "Pickup Location",
+      "dropoff": "Drop-off Location",
+      "paymentDetails": "Payment Details",
+      "bookingId": "Booking ID",
+      "transactionId": "Transaction ID",
+      "paymentMethod": "Payment Method",
+      "priceBreakdown": "Price Breakdown",
+      "baseFare": "Base Fare ({{days}} Days, {{km}} KM)",
+      "extraKms": "Extra KM ({{km}} KM)",
+      "discount": "Discount ({{percentage}}%)",
+      "taxes": "Taxes",
+      "totalAmount": "Total Amount",
+      "downloadInvoice": "Download Invoice"
+    },
+    "profile": {
+      "account": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "mobileNo": "Phone Number",
+        "address": "Address",
+        "gender": {
+          "male": "Male",
+          "female": "Female"
+        }
+      },
+      "submitComplaint": {
+        "title": "Submit Complaint",
+        "name": "Name",
+        "email": "Email",
+        "category": "Category",
+        "selectCategory": "Select Category",
+        "uploadLabel": "Upload Image (Optional)",
+        "uploadHint": "Only JPG, PNG, and MP4 files are supported",
+        "uploadButton": "Upload Images (if any)",
+        "comments": "Add Comments",
+        "commentsPlaceholder": "Please enter your comments",
+        "submit": "Submit",
+        "submitSuccess": "Complaint submitted successfully",
+        "submitThankYou": "Thank you for your message. Our support team will get back to you shortly.",
+        "close": "Close"
+      },
+      "licenseManagement": {
+        "licenseFront": "License (Front)",
+        "licenseBack": "License (Back)",
+        "licenseNumber": "License Number",
+        "licenseExpiry": "Expiry Date",
+        "uploadText": "Click to upload or drag and drop",
+        "dateOfBirth": "Date of Birth",
+        "issueDate": "Issue Date",
+        "documentSupported": "Supported formats: PDF, JPG, PNG (Max 10MB)"
+      },
+      "rentalHistory": {
+        "title": "Rental History",
+        "upcomingBooking": "Upcoming Booking",
+        "pastBooking": "Past Booking",
+        "bookingDate": "Booking Date",
+        "tripStartDateAndTime": "Trip Start Date & Time",
+        "tripEndDateAndTime": "Trip End Date & Time",
+        "amountPaid": "Amount Paid",
+        "rateExperience": "Rate Experience"
+      }
+    },
+    "menu": {
+      "accountDetails": "Account Details",
+      "licenseManagement": "License Management",
+      "rentalHistory": "Rental History",
+      "feedbackSection": "Feedback Section",
+      "rateRental": "Rate Rental",
+      "submitComplaint": "Submit Complaint",
+      "contactSupport": "Contact Support"
+    }
+  },
+  "carRental": {
+    "title": "Top Car Rentals – Handpicked for Every Journey",
+    "description": "Discover our curated collection. Whether you value economy or luxury — we have the perfect ride for you.",
+    "categories": {
+      "economy": "Economy Cars",
+      "popular": "Popular Cars",
+      "family": "Family Cars",
+      "luxury": "Luxury Cars",
+      "offRoad": "Off-Road Cars"
+    },
+    "noCarsAvailable": "No cars available in this category.",
+    "seeAllCars": "See all Cars →"
+  },
+  "testimonials": {
+    "title": "What Our Happy Customers Say",
+    "subtitle": "Real stories. Real journeys",
+    "accessibility": {
+      "goToTestimonial": "Go to testimonial"
+    }
+  },
+  "footer": {
+    "company": {
+      "title": "Company",
+      "aboutUs": "About us"
+    },
+    "services": {
+      "title": "Services",
+      "carRentals": "Car Rentals",
+      "hourlyRentals": "Hourly Rentals",
+      "luxuryCarHire": "Luxury Car Hire",
+      "outstationTravel": "Outstation Travel"
+    },
+    "support": {
+      "title": "Support",
+      "contactUs": "Contact Us",
+      "cancellationPolicy": "Cancellation Policy",
+      "termsConditions": "Terms & Conditions",
+      "privacyPolicy": "Privacy Policy"
+    },
+    "copyright": {
+      "text": "© 2025 Mr.Rent – All rights reserved – Developed by",
+      "poweredBy": "LOOY.io"
+    },
+    "social": {
+      "facebook": "Visit our Facebook page",
+      "twitter": "Visit our Twitter page",
+      "instagram": "Visit our Instagram page",
+      "linkedin": "Visit our LinkedIn page",
+      "whatsapp": "Visit our WhatsApp page"
+    }
+  },
+  "accessibility": {
+    "home": "MR RENT Home",
+    "logo": "MR RENT Logo",
+    "carImage": "Car Image",
+    "manualGear": "Manual Gear Icon",
+    "userAvatar": "User Avatar"
+  },
+  "newsletter": {
+    "title": "Stay in Control – Make Every Ride Count!",
+    "description": "Sign up for our newsletter to get the latest updates on new car models and rental locations — straight to your inbox.",
+    "emailPlaceholder": "Enter Email",
+    "subscribeButton": "SUBSCRIBE"
+  },
+  "steps": {
+    "title": "Book Your Car in 4 Easy Steps",
+    "subtitle": "Simple. Fast. Hassle-free — from search to steering."
+  },
+  "confidence": {
+    "title": "Drive With Confidence – Choose the Best",
+    "description": "Experience unmatched car rental services with a fleet you trust, prices you love, and support you can count on.",
+    "features": {
+      "fleet": {
+        "title": "Wide Fleet Selection",
+        "description": "From budget rides to premium drives — all under one roof."
+      },
+      "pricing": {
+        "title": "Transparent Pricing",
+        "description": "No hidden charges. Pay what you see."
+      },
+      "support": {
+        "title": "24/7 Customer Support",
+        "description": "Assistance at every step of your journey."
+      }
+    }
+  },
+  "contactUs": {
+    "subtitle": "Any question or remarks?"
+  },
+  "about": {
+    "breadcrumb": "About Us",
+    "sectionLabel": "About us",
+    "heading": "Where Every Drive Begins with Excellence!",
+    "description": "At MR. Rent, we believe renting a car should feel as smooth as driving one. That's why we offer a curated fleet of economy and luxury vehicles, instant booking, and no hidden fees — all backed by personalized service and round-the-clock support. Whether you're commuting, exploring, or arriving in style, we're here to move you forward.",
+    "features": {
+      "premiumBudget": "Premium & Budget Cars",
+      "sanitizedVerified": "Fully Sanitized & Verified",
+      "transparentPricing": "Transparent Pricing",
+      "assistance": "24/7 Assistance"
+    }
+  }
+}

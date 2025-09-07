@@ -1,0 +1,219 @@
+{
+  "common": {
+    "bookNow": "RESERVAR AHORA",
+    "logIn": "INICIAR SESIÓN",
+    "closeMenu": "Cerrar menú",
+    "openMenu": "Abrir menú",
+    "seeAll": "Ver todo",
+    "perDay": "/día",
+    "seats": "Asientos",
+    "noResults": "No hay resultados disponibles"
+  },
+  "navigation": {
+    "aboutUs": "Sobre Nosotros",
+    "contactUs": "Contáctenos"
+  },
+  "hero": {
+    "title": {
+      "part1": "Encuentra Tu",
+      "part2": "Vehículo Perfecto",
+      "part3": "– Fácil, Rápido, Económico"
+    },
+    "description": "Explora coches de alquiler con alta calificación, desbloquea ofertas exclusivas y conduce con confianza. Elige desde económico hasta lujo — adaptado para tu viaje y presupuesto.",
+    "form": {
+      "pickupLocation": {
+        "label": "Lugar de Recogida",
+        "placeholder": "Buscar ubicación",
+        "error": "El lugar de recogida es obligatorio"
+      },
+      "pickupDate": {
+        "label": "Fecha de Recogida",
+        "error": "La fecha de recogida es obligatoria"
+      },
+      "dropoffLocation": {
+        "label": "Lugar de Devolución",
+        "placeholder": "Buscar ubicación",
+        "error": "El lugar de devolución es obligatorio"
+      },
+      "dropoffDate": {
+        "label": "Fecha de Devolución",
+        "error": "La fecha de devolución es obligatoria"
+      },
+      "submitButton": "Encontrar un Vehículo"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "¡Bienvenido de nuevo!",
+      "subtitle": "Inicia sesión para continuar con nosotros",
+      "email": {
+        "label": "Correo electrónico",
+        "placeholder": "Ingresa tu correo"
+      },
+      "password": {
+        "label": "Contraseña",
+        "placeholder": "8+ caracteres"
+      },
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "submitButton": "Iniciar Sesión",
+      "or": "O",
+      "noAccount": "¿No tienes una cuenta?",
+      "getStarted": "Comenzar"
+    },
+    "signup": {
+      "title": "Crear Nueva Cuenta",
+      "subtitle": "Obtén tu cuenta gratuita ahora",
+      "firstName": {
+        "placeholder": "Nombre"
+      },
+      "lastName": {
+        "placeholder": "Apellido"
+      },
+      "email": {
+        "placeholder": "Correo electrónico"
+      },
+      "password": {
+        "placeholder": "Nueva Contraseña"
+      },
+      "phone": {
+        "placeholder": "Ingresa tu número",
+        "countryCode": "+49"
+      },
+      "address": {
+        "label": "Dirección",
+        "placeholder": "Ingresa aquí"
+      },
+      "gender": {
+        "label": "Género:",
+        "male": "Masculino",
+        "female": "Femenino"
+      },
+      "terms": {
+        "text": "Al registrarme, acepto los",
+        "terms": "términos de uso",
+        "and": "y la",
+        "privacy": "política de privacidad"
+      },
+      "submitButton": "Registrarse",
+      "or": "O",
+      "hasAccount": "¿Ya tienes una cuenta?",
+      "login": "Iniciar Sesión"
+    },
+    "errors": {
+      "loginFailed": "Error al iniciar sesión con correo/contraseña. Por favor, inténtalo de nuevo.",
+      "socialLoginFailed": "Error al iniciar sesión con {provider}. {error}",
+      "unexpectedError": "Ocurrió un error inesperado. Por favor, inténtalo de nuevo."
+    }
+  },
+  "user": {
+  "profile": {
+    "account":{
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "mobileNo": "Telefonnummer",
+    "address": "Adresse",
+    "gender": {
+      "male": "Männlich",
+      "female": "Weiblich"
+    }
+  },
+   "licenseManagement":{
+      "licenseFront":"License (Front)",
+      "licenseBack":"License (Back)",
+      "licenseNumber":"License Number",
+      "licenseExpiry":"Expiry Date"
+    }
+}
+},
+
+  "carRental": {
+    "title": "Mejores Alquileres de Coches – Seleccionados para Cada Viaje",
+    "description": "Descubre nuestra colección curada. Ya sea que valores la economía o el lujo — tenemos el vehículo perfecto para ti.",
+    "categories": {
+      "economy": "Coches Económicos",
+      "popular": "Coches Populares",
+      "family": "Coches Familiares",
+      "luxury": "Coches de Lujo",
+      "offRoad": "Coches Todo Terreno"
+    },
+    "noCarsAvailable": "No hay coches disponibles en esta categoría.",
+    "seeAllCars": "Ver todos los Coches →"
+  },
+  "testimonials": {
+    "title": "Lo que Dicen Nuestros Clientes Felices",
+    "subtitle": "Historias reales. Viajes reales",
+    "accessibility": {
+      "goToTestimonial": "Ir al testimonio"
+    }
+  },
+  "footer": {
+    "company": {
+      "title": "Empresa",
+      "aboutUs": "Sobre nosotros"
+    },
+    "services": {
+      "title": "Servicios",
+      "carRentals": "Alquiler de Coches",
+      "hourlyRentals": "Alquiler por Horas",
+      "luxuryCarHire": "Alquiler de Coches de Lujo",
+      "outstationTravel": "Viajes Fuera de la Ciudad"
+    },
+    "support": {
+      "title": "Soporte",
+      "contactUs": "Contáctenos",
+      "cancellationPolicy": "Política de Cancelación",
+      "termsConditions": "Términos y Condiciones",
+      "privacyPolicy": "Política de Privacidad"
+    },
+    "copyright": {
+      "text": "© 2025 Mr.Rent – Todos los derechos reservados – Desarrollado por",
+      "poweredBy": "LOOY.io"
+    },
+    "social": {
+      "facebook": "Visita nuestra página de Facebook",
+      "twitter": "Visita nuestra página de Twitter",
+      "instagram": "Visita nuestra página de Instagram",
+      "linkedin": "Visita nuestra página de LinkedIn",
+      "whatsapp": "Visita nuestra página de WhatsApp"
+    }
+  },
+  "accessibility": {
+    "home": "MR RENT Inicio",
+    "logo": "Logo MR RENT",
+    "carImage": "Imagen del Coche",
+    "manualGear": "Icono de Cambio Manual",
+    "userAvatar": "Avatar del Usuario"
+  },
+  "newsletter": {
+    "title": "¡Mantén el Control – Haz que Cada Viaje Cuente!",
+    "description": "Suscríbete a nuestro boletín para recibir las últimas actualizaciones sobre nuevos modelos de coches y ubicaciones de alquiler — directamente en tu bandeja de entrada.",
+    "emailPlaceholder": "Ingresa tu Email",
+    "subscribeButton": "SUSCRIBIRSE"
+  },
+  "steps": {
+    "title": "Reserva tu Coche en 4 Fáciles Pasos",
+    "subtitle": "Simple. Rápido. Sin complicaciones — desde la búsqueda hasta el volante."
+  },
+  "confidence": {
+    "title": "Conduce con Confianza – Elige lo Mejor",
+    "description": "Experimenta servicios de alquiler de coches sin igual con una flota en la que confías, precios que te encantan y soporte en el que puedes contar.",
+    "features": {
+      "fleet": {
+        "title": "Amplia Selección de Flota",
+        "description": "Desde vehículos económicos hasta premium — todo bajo un mismo techo."
+      },
+      "pricing": {
+        "title": "Precios Transparentes",
+        "description": "Sin cargos ocultos. Paga lo que ves."
+      },
+      "support": {
+        "title": "Soporte 24/7",
+        "description": "Asistencia en cada paso de tu viaje."
+      }
+    }
+  },
+  "contactUs": {
+    "subtitle": "¿Alguna pregunta o comentario?"
+  }
+} 
