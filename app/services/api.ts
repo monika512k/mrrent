@@ -54,6 +54,47 @@ export const getCarsTypes = async ({used_for,selected_language}: { used_for: str
   }
 };
 
+// Fetch body types for filters
+export const getBodyTypes = async ({ used_for, selected_language }: { used_for: string; selected_language: string }) => {
+  try {
+    const response = await fetch(`${BASE_URL}/car/body_type/?used_for=${used_for}&selected_language=${selected_language}`);
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching body types:', error);
+    throw error;
+  }
+};
+
+// Fetch transmissions for filters
+export const getTransmissions = async ({ used_for, selected_language }: { used_for?: string; selected_language?: string } = {}) => {
+  try {
+    const params: string[] = [];
+    if (used_for) params.push(`used_for=${used_for}`);
+    if (selected_language) params.push(`selected_language=${selected_language}`);
+    const query = params.length ? `?${params.join('&')}` : '';
+    const response = await fetch(`${BASE_URL}/car/transmissions/${query}`);
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching transmissions:', error);
+    throw error;
+  }
+};
+
+// Fetch fuel types for filters
+export const getFuelTypes = async ({ used_for, selected_language }: { used_for?: string; selected_language?: string } = {}) => {
+  try {
+    const params: string[] = [];
+    if (used_for) params.push(`used_for=${used_for}`);
+    if (selected_language) params.push(`selected_language=${selected_language}`);
+    const query = params.length ? `?${params.join('&')}` : '';
+    const response = await fetch(`${BASE_URL}/car/fuel_type/${query}`);
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching fuel types:', error);
+    throw error;
+  }
+};
+
 interface SignupRequest {
   email: string;
   password: string;

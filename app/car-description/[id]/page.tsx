@@ -217,6 +217,7 @@ const CarDescription = () => {
       tripAmount, extraKmPrice, discount, totalPrice, taxAmount, totalDays,
       searchData,
     }
+  
 
     const result = await licenceStatus() as any;
     if (result?.data?.status === "no_license_found" && result?.data?.status != "Approved" && data) {

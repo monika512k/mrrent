@@ -94,9 +94,9 @@ function ReviewBookingContent() {
         data: payload,
       }) as APIResponse;
       
-      if (result?.status && result.data) {
-        setApiCalculatedData(result.data);
-        setCalculatedTotal(result.data.total || 0);
+      if (result?.status && result?.data) {
+        setApiCalculatedData(result?.data);
+        setCalculatedTotal(result?.data?.total_amount_with_tax || 0);
       }
     } catch (error) {
       console.error('Error calculating booking:', error);

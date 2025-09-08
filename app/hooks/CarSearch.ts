@@ -169,8 +169,8 @@ export const useCarSearch = (
         return {
             fuel_type: internalFilters?.selectedFuel?.length > 0 ? internalFilters.selectedFuel.join(',') : '',
             transmission: internalFilters?.selectedTransmission?.length > 0 ? internalFilters.selectedTransmission.join(',') : '',
-            car_type: internalFilters?.selectedCarTypes?.length > 0 ? internalFilters.selectedCarTypes.join(',') : '',
-            body_type: '',
+            body_type: internalFilters?.selectedCarTypes?.length > 0 ? internalFilters.selectedCarTypes.join(',') : '',
+            car_type: '',
             pickup_location: pickup_location || searchData?.pickupLocation || '',
             pickup_date: searchData?.pickupDate || '',
             drop_date: searchData?.dropoffDate || '',

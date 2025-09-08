@@ -9,6 +9,7 @@ import Filters from 'app/Common/Filters';
 import { useCarSearch } from '../hooks/CarSearch';
 import { Users, Fuel, Loader2 } from "lucide-react";
 import { useLanguage } from 'app/context/LanguageContext';
+import { getCarsTypes } from 'app/services/api';
 
 // Car card component for virtualization
 const CarCard = ({ car, router }: { car: any, router: any }) => {
@@ -80,8 +81,8 @@ const CarListing = () => {
     const listRef = useRef<any>(null);
     const gridRef = useRef<any>(null);
 
-    const carTypes = ['Popular Cars', 'Economy Cars', 'Luxury Cars', 'Family Cars', 'Off-Road Cars'];
-    const [activeType, setActiveType] = useState(carTypes[0]);
+    const [carTypes, setCarTypes] = useState<Array<{ label: string; value: string }>>([]);
+    const [activeType, setActiveType] = useState<string>('');
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
     const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
 
@@ -151,6 +152,32 @@ const CarListing = () => {
             priceRange,
         });
     }, []);
+
+    // Fetch car types dynamically
+    const { language } = useLanguage();
+    useEffect(() => {
+        const fetchCarTypes = async () => {
+            try {
+                const res = await getCarsTypes({ used_for: 'filter', selected_language: String(language || 'en') }) as any;
+                if (res?.status && Array.isArray(res?.data)) {
+                    // Keep both label and value: label = other_name, value = name
+                    const types = res.data.map((ct: any) => ({
+                        label: ct?.other_name || ct?.name,
+                        value: ct?.name || ct?.other_name,
+                    })).filter((x: any) => x?.value);
+                    setCarTypes(types);
+                    if (types.length && !activeType) {
+                        setActiveType(types[0].label);
+                    }
+                } else {
+                    setCarTypes([]);
+                }
+            } catch (e) {
+                setCarTypes([]);
+            }
+        };
+        fetchCarTypes();
+    }, [language]);
 
     const handleFilterChange = useCallback((filterType: string, value: any) => {
         const newFilters = { ...filters };
@@ -260,27 +287,26 @@ const CarListing = () => {
         <div className={`bg-[#121212] text-white min-h-screen ${mobileFiltersOpen ? 'overflow-hidden h-screen' : ''}`}>
             <div className="px-6 pt-[58px] md:px-[86px] pb-6 bg-[#121212] relative z-10">
                 <SearchForm
-
                     onSubmitOverride={handleSearch}
                     locationList={locations as any}
-                    currentLocation={{ id: searchData?.pickupLocationId, address: searchData?.pickupLocation }}
+                    current_location={String(searchData?.pickupLocationId || '')}
                 />
 
                 {/* Car Type Buttons */}
                 <div className="flex flex-wrap justify-center gap-4 mt-6 max-w-full overflow-x-auto">
                     {carTypes.map((type) => (
                         <button
-                            key={type}
+                            key={type.value}
                             onClick={() => {
-                                setActiveType(type);
-                                handleFilterChange('carTypes', [type]);
+                                setActiveType(type.label);
+                                handleFilterChange('carTypes', [type.value]);
                             }}
-                            className={`flex justify-center items-center px-4 py-2 rounded-full font-['Poppins'] font-medium text-base leading-6 transition-colors duration-200 whitespace-nowrap ${activeType === type
+                            className={`flex justify-center items-center px-4 py-2 rounded-full font-['Poppins'] font-medium text-base leading-6 transition-colors duration-200 whitespace-nowrap ${activeType === type.label
                                 ? 'bg-[#454545] hover:bg-[#555555]'
                                 : 'bg-[#454545]/30 border border-[#F6F6F6]/40 hover:bg-[#454545]/50'
                                 } text-[#F6F6F6]`}
                         >
-                            {type}
+                            {type.label}
                         </button>
                     ))}
                 </div>

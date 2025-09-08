@@ -1,8 +1,10 @@
-'use client'
-import React, { useState } from 'react';
+"use client"
+import React, { useEffect, useState } from 'react';
 import { ChevronDown } from "lucide-react";
 import RangeSlider from 'react-range-slider-input';
 import 'react-range-slider-input/dist/style.css';
+import { getBodyTypes, getTransmissions, getFuelTypes, getCarsTypes } from 'app/services/api';
+import { useLanguage } from 'app/context/LanguageContext';
 
 interface FiltersProps {
     priceRange: [number, number];
@@ -44,6 +46,92 @@ const Filters: React.FC<FiltersProps> = ({
         transmission: true,
         fuelType: true,
     });
+
+    const { language } = useLanguage();
+    const [bodyTypes, setBodyTypes] = useState<Array<{ id: number; name: string; other_name: string }>>([]);
+    const [loadingBodyTypes, setLoadingBodyTypes] = useState<boolean>(false);
+    const [carTypes, setCarTypes] = useState<Array<{ id: number; name: string; other_name: string }>>([]);
+    const [loadingCarTypes, setLoadingCarTypes] = useState<boolean>(false);
+    const [transmissionTypes, setTransmissionTypes] = useState<Array<{ id: number; name: string; other_name: string }>>([]);
+    const [loadingTransmissions, setLoadingTransmissions] = useState<boolean>(false);
+    const [fuelTypes, setFuelTypes] = useState<Array<{ id: number; name: string; other_name: string }>>([]);
+    const [loadingFuels, setLoadingFuels] = useState<boolean>(false);
+
+    useEffect(() => {
+        const fetchBodyTypes = async () => {
+            try {
+                setLoadingBodyTypes(true);
+                const res = await getBodyTypes({ used_for: 'filter', selected_language: String(language || 'en') });
+                if (res?.status && Array.isArray(res?.data)) {
+                    setBodyTypes(res.data);
+                } else {
+                    setBodyTypes([]);
+                }
+            } catch (e) {
+                setBodyTypes([]);
+            } finally {
+                setLoadingBodyTypes(false);
+            }
+        };
+        fetchBodyTypes();
+    }, [language]);
+
+    useEffect(() => {
+        const fetchCarTypes = async () => {
+            try {
+                setLoadingCarTypes(true);
+                const res = await getCarsTypes({ used_for: 'filter', selected_language: String(language || 'en') }) as any;
+                if (res?.status && Array.isArray(res?.data)) {
+                    setCarTypes(res.data);
+                } else {
+                    setCarTypes([]);
+                }
+            } catch (e) {
+                setCarTypes([]);
+            } finally {
+                setLoadingCarTypes(false);
+            }
+        };
+        fetchCarTypes();
+    }, [language]);
+
+    useEffect(() => {
+        const fetchTransmissions = async () => {
+            try {
+                setLoadingTransmissions(true);
+                const res = await getTransmissions({ used_for: 'filter', selected_language: String(language || 'en') });
+                if (res?.status && Array.isArray(res?.data)) {
+                    setTransmissionTypes(res.data);
+                } else {
+                    setTransmissionTypes([]);
+                }
+            } catch (e) {
+                setTransmissionTypes([]);
+            } finally {
+                setLoadingTransmissions(false);
+            }
+        };
+        fetchTransmissions();
+    }, [language]);
+
+    useEffect(() => {
+        const fetchFuelTypes = async () => {
+            try {
+                setLoadingFuels(true);
+                const res = await getFuelTypes({ used_for: 'filter', selected_language: String(language || 'en') });
+                if (res?.status && Array.isArray(res?.data)) {
+                    setFuelTypes(res.data);
+                } else {
+                    setFuelTypes([]);
+                }
+            } catch (e) {
+                setFuelTypes([]);
+            } finally {
+                setLoadingFuels(false);
+            }
+        };
+        fetchFuelTypes();
+    }, [language]);
 
     const toggleSection = (section: keyof OpenSections) => {
         setOpenSections((prev: OpenSections) => ({
@@ -189,17 +277,27 @@ const Filters: React.FC<FiltersProps> = ({
             </button>
             {openSections.carType && (
                 <div className="flex flex-col gap-2 mt-2">
-                    {['Sedan', 'SUV', 'Wagon', 'Crossover', 'Coupe', 'Pickup'].map((type: string) => (
-                        <label key={type} className={`flex items-center gap-3 ${!selectedCarTypes.includes(type) ? 'opacity-40' : ''}`}>
-                            <input
-                                type="checkbox"
-                                checked={selectedCarTypes.includes(type)}
-                                onChange={() => handleCarTypeChange(type)}
-                                className="w-[15px] h-[15px] rounded-sm bg-[#747474] border-none appearance-none checked:bg-[#111827] checked:bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2215%22%20height%3D%2215%22%20viewBox%3D%220%200%2015%2015%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20fill-rule%3D%22evenodd%22%20d%3D%22M5.625%2010.125L2.5%207L1.25%208.25L5.625%2012.5L12.5%205.625L11.25%204.375L5.625%2010.125Z%22%2F%3E%3C%2Fsvg%3E')] checked:bg-center checked:bg-no-repeat cursor-pointer"
-                            />
-                            <span className="font-['Poppins'] text-sm text-[#F6F6F6]">{type}</span>
-                        </label>
-                    ))}
+                    {loadingCarTypes && (
+                        <span className="text-xs text-[#F6F6F6]/60">Loading...</span>
+                    )}
+                    {!loadingCarTypes && carTypes?.length === 0 && (
+                        <span className="text-xs text-[#F6F6F6]/60">No options</span>
+                    )}
+                    {!loadingCarTypes && carTypes?.map((ct) => {
+                        const valueName = ct?.name || '';
+                        const labelName = ct?.other_name || valueName;
+                        return (
+                            <label key={ct.id} className={`flex items-center gap-3 ${!selectedCarTypes.includes(valueName) ? 'opacity-40' : ''}`}>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedCarTypes.includes(valueName)}
+                                    onChange={() => handleCarTypeChange(valueName)}
+                                    className="w-[15px] h-[15px] rounded-sm bg-[#747474] border-none appearance-none checked:bg-[#111827] checked:bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2215%22%20height%3D%2215%22%20viewBox%3D%220%200%2015%2015%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20fill-rule%3D%22evenodd%22%20d%3D%22M5.625%2010.125L2.5%207L1.25%208.25L5.625%2012.5L12.5%205.625L11.25%204.375L5.625%2010.125Z%22%2F%3E%3C%2Fsvg%3E')] checked:bg-center checked:bg-no-repeat cursor-pointer"
+                                />
+                                <span className="font-['Poppins'] text-sm text-[#F6F6F6]">{labelName}</span>
+                            </label>
+                        );
+                    })}
                 </div>
             )}
         </div>
@@ -216,17 +314,27 @@ const Filters: React.FC<FiltersProps> = ({
             </button>
             {openSections.transmission && (
                 <div className="flex flex-col gap-2 mt-2">
-                    {['Manual', 'Automatic'].map((type: string) => (
-                        <label key={type} className={`flex items-center gap-3 ${!selectedTransmission.includes(type) ? 'opacity-40' : ''}`}>
-                            <input
-                                type="checkbox"
-                                checked={selectedTransmission.includes(type)}
-                                onChange={() => handleTransmissionChange(type)}
-                                className="w-[15px] h-[15px] bg-[#747474] border-none rounded-sm appearance-none checked:bg-[#111827] checked:bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2215%22%20height%3D%2215%22%20viewBox%3D%220%200%2015%2015%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20fill-rule%3D%22evenodd%22%20d%3D%22M5.625%2010.125L2.5%207L1.25%208.25L5.625%2012.5L12.5%205.625L11.25%204.375L5.625%2010.125Z%22%2F%3E%3C%2Fsvg%3E')] checked:bg-center checked:bg-no-repeat cursor-pointer"
-                            />
-                            <span className="font-['Poppins'] text-sm text-[#F6F6F6]">{type}</span>
-                        </label>
-                    ))}
+                    {loadingTransmissions && (
+                        <span className="text-xs text-[#F6F6F6]/60">Loading...</span>
+                    )}
+                    {!loadingTransmissions && transmissionTypes?.length === 0 && (
+                        <span className="text-xs text-[#F6F6F6]/60">No options</span>
+                    )}
+                    {!loadingTransmissions && transmissionTypes?.map((t) => {
+                        const valueName = t?.name || '';
+                        const labelName = t?.other_name || valueName;
+                        return (
+                            <label key={t.id} className={`flex items-center gap-3 ${!selectedTransmission.includes(valueName) ? 'opacity-40' : ''}`}>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedTransmission.includes(valueName)}
+                                    onChange={() => handleTransmissionChange(valueName)}
+                                    className="w-[15px] h-[15px] bg-[#747474] border-none rounded-sm appearance-none checked:bg-[#111827] checked:bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2215%22%20height%3D%2215%22%20viewBox%3D%220%200%2015%2015%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20fill-rule%3D%22evenodd%22%20d%3D%22M5.625%2010.125L2.5%207L1.25%208.25L5.625%2012.5L12.5%205.625L11.25%204.375L5.625%2010.125Z%22%2F%3E%3C%2Fsvg%3E')] checked:bg-center checked:bg-no-repeat cursor-pointer"
+                                />
+                                <span className="font-['Poppins'] text-sm text-[#F6F6F6]">{labelName}</span>
+                            </label>
+                        );
+                    })}
                 </div>
             )}
         </div>
@@ -243,17 +351,27 @@ const Filters: React.FC<FiltersProps> = ({
             </button>
             {openSections.fuelType && (
                 <div className="flex flex-col gap-2 mt-6">
-                    {['Petrol', 'Diesel', 'Electric'].map((type: string) => (
-                        <label key={type} className={`flex items-center gap-3 ${!selectedFuel.includes(type) ? 'opacity-40' : ''}`}>
-                            <input
-                                type="checkbox"
-                                checked={selectedFuel.includes(type)}
-                                onChange={() => handleFuelChange(type)}
-                                className="w-[15px] h-[15px] bg-[#747474] rounded-sm appearance-none checked:bg-[#111827] checked:bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2215%22%20height%3D%2215%22%20viewBox%3D%220%200%2015%2015%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20fill-rule%3D%22evenodd%22%20d%3D%22M5.625%2010.125L2.5%207L1.25%208.25L5.625%2012.5L12.5%205.625L11.25%204.375L5.625%2010.125Z%22%2F%3E%3C%2Fsvg%3E')] checked:bg-center checked:bg-no-repeat cursor-pointer"
-                            />
-                            <span className="font-['Poppins'] text-sm text-[#F6F6F6]">{type}</span>
-                        </label>
-                    ))}
+                    {loadingFuels && (
+                        <span className="text-xs text-[#F6F6F6]/60">Loading...</span>
+                    )}
+                    {!loadingFuels && fuelTypes?.length === 0 && (
+                        <span className="text-xs text-[#F6F6F6]/60">No options</span>
+                    )}
+                    {!loadingFuels && fuelTypes?.map((f) => {
+                        const valueName = f?.name || '';
+                        const labelName = f?.other_name || valueName;
+                        return (
+                            <label key={f.id} className={`flex items-center gap-3 ${!selectedFuel.includes(valueName) ? 'opacity-40' : ''}`}>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedFuel.includes(valueName)}
+                                    onChange={() => handleFuelChange(valueName)}
+                                    className="w-[15px] h-[15px] bg-[#747474] rounded-sm appearance-none checked:bg-[#111827] checked:bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2215%22%20height%3D%2215%22%20viewBox%3D%220%200%2015%2015%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20fill-rule%3D%22evenodd%22%20d%3D%22M5.625%2010.125L2.5%207L1.25%208.25L5.625%2012.5L12.5%205.625L11.25%204.375L5.625%2010.125Z%22%2F%3E%3C%2Fsvg%3E')] checked:bg-center checked:bg-no-repeat cursor-pointer"
+                                />
+                                <span className="font-['Poppins'] text-sm text-[#F6F6F6]">{labelName}</span>
+                            </label>
+                        );
+                    })}
                 </div>
             )}
         </div>
