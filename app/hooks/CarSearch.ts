@@ -2,6 +2,7 @@ import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { debounce } from 'lodash';
 import { getCarList, locations as fetchLocations,operationLocation } from 'app/services/api';
 import { useLanguage } from 'app/context/LanguageContext';
+import CarSearch from 'app/Common/CarSearch';
 
 // Types
 interface SearchFormData {
@@ -165,6 +166,7 @@ export const useCarSearch = (
         } else if (searchData?.dropoffLocation) {
             dropoff_location = findLocationIdByAddress(searchData.dropoffLocation);
         }
+
 
         return {
             fuel_type: internalFilters?.selectedFuel?.length > 0 ? internalFilters.selectedFuel.join(',') : '',

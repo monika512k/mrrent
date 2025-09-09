@@ -96,7 +96,11 @@ function ReviewBookingContent() {
       
       if (result?.status && result?.data) {
         setApiCalculatedData(result?.data);
+        try{
         setCalculatedTotal(result?.data?.total_amount_with_tax || 0);
+        }catch(err){
+          console.log('pppppp',err)
+        }
       }
     } catch (error) {
       console.error('Error calculating booking:', error);
@@ -171,7 +175,8 @@ function ReviewBookingContent() {
       start_date: details.searchData?.pickupDate || "",
       end_date: details.searchData?.dropoffDate || "",
       extra_kms: extraKms,
-      pickup_location: details.searchData?.pickupLocationId || "", // Fixed: using pickupLocationId
+      pickup_location_id: details.searchData?.pickupLocationId || "", // Fixed: using pickupLocationId
+      drop_location_id:details?.searchData?.dropoffLocationId||''
     };
     
     try {
