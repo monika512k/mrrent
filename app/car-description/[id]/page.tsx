@@ -200,7 +200,7 @@ const CarDescription = () => {
     setDiscountDescription("");
 
 
-    if (!searchData || !searchData?.pickupDate || !searchData?.dropoffDate || !searchData?.pickupLocation || !searchData?.dropoffLocation) {
+    if (!searchData || !searchData?.pickupDate || !searchData?.dropoffDate || !searchData?.pickupLocationId || !searchData?.dropoffLocationId) {
       ToastMsg("Missing ( pickupDate, dropoffDate, pickupLocation, dropoffLocation )", "error")
       return;
     }

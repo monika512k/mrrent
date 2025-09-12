@@ -11,6 +11,8 @@ interface FiltersProps {
     setPriceRange: (range: [number, number]) => void;
     selectedCarTypes: string[];
     setSelectedCarTypes: (types: string[] | ((prev: string[]) => string[])) => void;
+    selectedBodyTypes: string[];
+    setSelectedBodyTypes: (types: string[] | ((prev: string[]) => string[])) => void;
     selectedTransmission: string[];
     setSelectedTransmission: (types: string[] | ((prev: string[]) => string[])) => void;
     selectedFuel: string[];
@@ -23,6 +25,7 @@ interface FiltersProps {
 type OpenSections = {
     price: boolean;
     carType: boolean;
+    bodyType: boolean;
     transmission: boolean;
     fuelType: boolean;
 };
@@ -32,6 +35,8 @@ const Filters: React.FC<FiltersProps> = ({
     setPriceRange,
     selectedCarTypes,
     setSelectedCarTypes,
+    selectedBodyTypes,
+    setSelectedBodyTypes,
     selectedTransmission,
     setSelectedTransmission,
     selectedFuel,
@@ -43,11 +48,12 @@ const Filters: React.FC<FiltersProps> = ({
     const [openSections, setOpenSections] = useState<OpenSections>({
         price: true,
         carType: true,
+        bodyType: true,
         transmission: true,
         fuelType: true,
     });
 
-    const { language } = useLanguage();
+    const {t, language } = useLanguage();
     const [bodyTypes, setBodyTypes] = useState<Array<{ id: number; name: string; other_name: string }>>([]);
     const [loadingBodyTypes, setLoadingBodyTypes] = useState<boolean>(false);
     const [carTypes, setCarTypes] = useState<Array<{ id: number; name: string; other_name: string }>>([]);
@@ -147,6 +153,13 @@ const Filters: React.FC<FiltersProps> = ({
         setSelectedCarTypes(newCarTypes);
     };
 
+    const handleBodyTypeChange = (type: string) => {
+        const newBodyTypes = selectedBodyTypes.includes(type) 
+            ? selectedBodyTypes.filter((t: string) => t !== type) 
+            : [...selectedBodyTypes, type];
+        setSelectedBodyTypes(newBodyTypes);
+    };
+
     const handleTransmissionChange = (type: string) => {
         const newTransmission = selectedTransmission.includes(type) 
             ? selectedTransmission.filter((t: string) => t !== type) 
@@ -168,9 +181,9 @@ const Filters: React.FC<FiltersProps> = ({
     const renderAppliedFilters = () => (
         <div className="flex flex-col p-4 rounded-lg bg-gradient-to-b from-[rgba(255,242,221,0.05)] to-[rgba(235,233,230,0.05)] backdrop-blur-lg">
             <div className="flex justify-between items-center w-full">
-                <span className="font-['Poppins'] font-semibold text-base text-[#F6F6F6]">Applied Filters</span>
+                <span className="font-['Poppins'] font-semibold text-base text-[#F6F6F6]"> {t('hero.filter.appliedFilters')}</span>
                 <button onClick={clearFilters} className="font-['Poppins'] font-semibold text-base text-[#F3B753] cursor-pointer">
-                    Clear All
+                  {t('hero.filter.clearAllButton')}
                 </button>
             </div>
             <div className="flex flex-wrap gap-2 mt-6">
@@ -192,7 +205,8 @@ const Filters: React.FC<FiltersProps> = ({
                 onClick={() => toggleSection('price')}
                 className="flex justify-between items-center w-full cursor-pointer"
             >
-                <span className="font-['Poppins'] font-semibold text-base text-[#F6F6F6]">Price</span>
+                <span className="font-['Poppins'] font-semibold text-base text-[#F6F6F6]"> {t('hero.filter.price')}
+</span>
                 <ChevronDown className={`w-6 h-6 text-[#F6F6F6] transition-transform duration-200 ${openSections.price ? 'rotate-180' : ''}`} />
             </button>
             {openSections.price && (
@@ -220,7 +234,7 @@ const Filters: React.FC<FiltersProps> = ({
                         {/* Price Input Fields */}
                         <div className="flex gap-4 mt-6">
                             <div className="flex-1">
-                                <label className="block text-xs text-[#F6F6F6]/60 mb-1">Min Price</label>
+                                <label className="block text-xs text-[#F6F6F6]/60 mb-1">{t('hero.filter.minPrice')}</label>
                                 <div className="relative">
                                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#F6F6F6]/60">€</span>
                                     <input
@@ -240,7 +254,7 @@ const Filters: React.FC<FiltersProps> = ({
                                 </div>
                             </div>
                             <div className="flex-1">
-                                <label className="block text-xs text-[#F6F6F6]/60 mb-1">Max Price</label>
+                                <label className="block text-xs text-[#F6F6F6]/60 mb-1">{t('hero.filter.maxPrice')}</label>
                                 <div className="relative">
                                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#F6F6F6]/60">€</span>
                                     <input
@@ -303,13 +317,50 @@ const Filters: React.FC<FiltersProps> = ({
         </div>
     );
 
+    const renderBodyTypeFilter = () => (
+        <div className="flex flex-col p-4 rounded-lg bg-gradient-to-b from-[rgba(255,242,221,0.05)] to-[rgba(235,233,230,0.05)] backdrop-blur-lg">
+            <button 
+                onClick={() => toggleSection('bodyType')}
+                className="flex justify-between items-center w-full cursor-pointer"
+            >
+                <span className="font-['Poppins'] font-semibold text-base text-[#F6F6F6]">Body Type</span>
+                <ChevronDown className={`w-6 h-6 text-[#F6F6F6] transition-transform duration-200 ${openSections.bodyType ? 'rotate-180' : ''}`} />
+            </button>
+            {openSections.bodyType && (
+                <div className="flex flex-col gap-2 mt-2">
+                    {loadingBodyTypes && (
+                        <span className="text-xs text-[#F6F6F6]/60">Loading...</span>
+                    )}
+                    {!loadingBodyTypes && bodyTypes?.length === 0 && (
+                        <span className="text-xs text-[#F6F6F6]/60">No options</span>
+                    )}
+                    {!loadingBodyTypes && bodyTypes?.map((bt) => {
+                        const valueName = bt?.name || '';
+                        const labelName = bt?.other_name || valueName;
+                        return (
+                            <label key={bt.id} className={`flex items-center gap-3 ${!selectedBodyTypes.includes(valueName) ? 'opacity-40' : ''}`}>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedBodyTypes.includes(valueName)}
+                                    onChange={() => handleBodyTypeChange(valueName)}
+                                    className="w-[15px] h-[15px] rounded-sm bg-[#747474] border-none appearance-none checked:bg-[#111827] checked:bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2215%22%20height%3D%2215%22%20viewBox%3D%220%200%2015%2015%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20fill-rule%3D%22evenodd%22%20d%3D%22M5.625%2010.125L2.5%207L1.25%208.25L5.625%2012.5L12.5%205.625L11.25%204.375L5.625%2010.125Z%22%2F%3E%3C%2Fsvg%3E')] checked:bg-center checked:bg-no-repeat cursor-pointer"
+                                />
+                                <span className="font-['Poppins'] text-sm text-[#F6F6F6]">{labelName}</span>
+                            </label>
+                        );
+                    })}
+                </div>
+            )}
+        </div>
+    );
+
     const renderTransmissionFilter = () => (
         <div className="flex flex-col p-4 rounded-lg bg-gradient-to-b from-[rgba(255,242,221,0.05)] to-[rgba(235,233,230,0.05)] backdrop-blur-lg">
             <button 
                 onClick={() => toggleSection('transmission')}
                 className="flex justify-between items-center w-full cursor-pointer"
             >
-                <span className="font-['Poppins'] font-semibold text-base text-[#F6F6F6]">Transmission</span>
+                <span className="font-['Poppins'] font-semibold text-base text-[#F6F6F6]">{t('hero.filter.transmission')}</span>
                 <ChevronDown className={`w-6 h-6 text-[#F6F6F6] transition-transform duration-200 ${openSections.transmission ? 'rotate-180' : ''}`} />
             </button>
             {openSections.transmission && (
@@ -346,7 +397,7 @@ const Filters: React.FC<FiltersProps> = ({
                 onClick={() => toggleSection('fuelType')}
                 className="flex justify-between items-center w-full cursor-pointer"
             >
-                <span className="font-['Poppins'] font-semibold text-base text-[#F6F6F6]">Fuel Type</span>
+                <span className="font-['Poppins'] font-semibold text-base text-[#F6F6F6]">{t('hero.filter.fuelType')}</span>
                 <ChevronDown className={`w-6 h-6 text-[#F6F6F6] transition-transform duration-200 ${openSections.fuelType ? 'rotate-180' : ''}`} />
             </button>
             {openSections.fuelType && (
@@ -383,7 +434,8 @@ const Filters: React.FC<FiltersProps> = ({
             <div className="hidden md:block col-span-3 flex flex-col space-y-2 gap-4">
                 {renderAppliedFilters()}
                 {renderPriceFilter()}
-                {renderCarTypeFilter()}
+                {/* {renderCarTypeFilter()} */}
+                {renderBodyTypeFilter()}
                 {renderTransmissionFilter()}
                 {renderFuelTypeFilter()}
             </div>
@@ -394,7 +446,7 @@ const Filters: React.FC<FiltersProps> = ({
                     className="flex justify-between items-center bg-[#1A1A1A] p-4 rounded-lg cursor-pointer"
                     onClick={toggleMobileFilters}
                 >
-                    <span className="font-['Poppins'] font-semibold text-base text-[#F6F6F6]">Filters</span>
+                    <span className="font-['Poppins'] font-semibold text-base text-[#F6F6F6]">{t('hero.filter.filters')}</span>
                     <ChevronDown className={`w-6 h-6 text-[#F6F6F6] transition-transform duration-200 ${mobileFiltersOpen ? 'rotate-180' : ''}`} />
                 </div>
             </div>
@@ -405,7 +457,8 @@ const Filters: React.FC<FiltersProps> = ({
                 <div className="overflow-y-scroll h-full p-4">
                     {renderAppliedFilters()}
                     {renderPriceFilter()}
-                    {renderCarTypeFilter()}
+                    {/* {renderCarTypeFilter()} */}
+                    {renderBodyTypeFilter()}
                     {renderTransmissionFilter()}
                     {renderFuelTypeFilter()}
                 </div>

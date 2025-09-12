@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
         hostname: 'api.mr-rent.net',
         pathname: '/media/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'api2.mr-rent.net',
+        pathname: '/media/**',
+      },
     ],
   },
 };

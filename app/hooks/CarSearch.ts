@@ -57,6 +57,7 @@ interface UseCarSearchFilters {
     selectedFuel: string[];
     selectedTransmission: string[];
     selectedCarTypes: string[];
+    selectedBodyTypes: string[];
     priceRange: [number, number];
 }
 
@@ -104,6 +105,7 @@ const DEFAULT_FILTERS: UseCarSearchFilters = {
     selectedFuel: [],
     selectedTransmission: [],
     selectedCarTypes: [],
+    selectedBodyTypes: [],
     priceRange: [0, 120000],
 };
 
@@ -122,7 +124,7 @@ export const useCarSearch = (
       currentSearchData = stored ? JSON.parse(stored) : {};
     }
     const [locations, setLocations] = useState<Location[]>([]);
-    const [searchData, setSearchData] = useState<SearchFormData | {}>(currentSearchData);
+    const [searchData, setSearchData] = useState<SearchFormData | null>(currentSearchData as SearchFormData || null);
 
     // Loading states
     const [loading, setLoading] = useState(false);
@@ -171,14 +173,16 @@ export const useCarSearch = (
         return {
             fuel_type: internalFilters?.selectedFuel?.length > 0 ? internalFilters.selectedFuel.join(',') : '',
             transmission: internalFilters?.selectedTransmission?.length > 0 ? internalFilters.selectedTransmission.join(',') : '',
-            body_type: internalFilters?.selectedCarTypes?.length > 0 ? internalFilters.selectedCarTypes.join(',') : '',
-            car_type: '',
-            pickup_location: pickup_location || searchData?.pickupLocation || '',
+            car_type: internalFilters?.selectedCarTypes?.length > 0 ? internalFilters.selectedCarTypes.join(',') : '',
+            body_type: internalFilters?.selectedBodyTypes?.length > 0 ? internalFilters.selectedBodyTypes.join(',') : '',
+            pickup_location: pickup_location || (searchData?.pickupLocation || ''),
             pickup_date: searchData?.pickupDate || '',
             drop_date: searchData?.dropoffDate || '',
-            dropoff_location: dropoff_location || searchData?.dropoffLocation || '',
+            dropoff_location: dropoff_location || (searchData?.dropoffLocation || ''),
             page,
             page_size: config?.pageSize,
+            min_price:internalFilters.priceRange[0],
+            max_price:internalFilters?.priceRange[1]
         };
     }, [internalFilters, searchData, findLocationIdByAddress, config.pageSize]);
 

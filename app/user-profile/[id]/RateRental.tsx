@@ -1,86 +1,135 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { X, Star } from 'lucide-react';
 import { useLanguage } from 'app/context/LanguageContext';
+import { bookingList, bookRating } from 'app/services/api';
+import { toast } from 'react-toastify';
 
-const RateRental=() => {
+// Define proper interfaces based on API response
+interface CarDetails {
+    id: number;
+    brand: string;
+    model: string;
+    year: number;
+    color: string;
+    car_number: string;
+    price_per_day: string;
+    thumbnail_image: string;
+}
+
+interface UserDetails {
+    id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone_country_code: string | null;
+    phone_number: string;
+    profile_pic: string;
+}
+
+interface TransactionDetail {
+    transaction_id: string;
+    amount: number;
+    payment_method: string;
+    status: string;
+    created_at: string;
+}
+
+interface Booking {
+    id: number;
+    rating_details: any;
+    car_details: CarDetails;
+    user_details: UserDetails;
+    transaction_detail: TransactionDetail;
+    created_at: string;
+    updated_at: string;
+    booking_id: string;
+    start_date: string;
+    end_date: string;
+    total_days: number;
+    status: string;
+    payment_status: string;
+    total_amount: string;
+}
+
+const RateRental = () => {
     const [activeTab, setActiveTab] = useState('upcoming');
     const [showRatingPopup, setShowRatingPopup] = useState(false);
     const [rating, setRating] = useState(0);
     const [feedback, setFeedback] = useState('');
     const [hoveredStar, setHoveredStar] = useState(0);
-    const { t } = useLanguage();
-    // Sample data - replace with your actual data
-    const bookingData = {
-        upcoming: [
-            {
-                id: 1,
-                bookingDate: '10/04/2025',
-                car: {
-                    name: 'Porsche Cayenne GTS 2022',
-                    type: 'Auto | 5 Seats | Petrol',
-                    image: '/api/placeholder/80/60',
-                },
-                amount: '€500',
-                status: 'Confirmed',
-                statusColor: 'bg-green-500',
-                tripStart: {
-                    date: '12/04/2025',
-                    time: '20:00'
-                },
-                tripEnd: {
-                    date: '14/04/2025',
-                    time: '20:00'
-                }
+    const [selectedBookingId, setSelectedBookingId] = useState<number | null>(null);
+    const { t, language } = useLanguage();
+    const [bookingData, setBookingData] = useState<Booking[]>([]);
+    const [loading, setLoading] = useState(false);
+
+    // Get booking data
+    const getBookingData = async (type: string) => {
+        try {
+            setLoading(true);
+            const response = await bookingList(type, language) as any;
+            if (response.status) {
+                setBookingData(response.data);
             }
-        ],
-        past: [
-            {
-                id: 2,
-                bookingDate: '10/04/2025',
-                car: {
-                    name: 'Porsche Cayenne GTS 2022',
-                    type: 'Auto | 5 Seats | Petrol',
-                    image: '/api/placeholder/80/60',
-                },
-                amount: '€500',
-                status: 'Pending',
-                statusColor: 'bg-yellow-500',
-                tripStart: {
-                    date: '12/04/2025',
-                    time: '20:00'
-                },
-                tripEnd: {
-                    date: '14/04/2025',
-                    time: '20:00'
-                }
-            }
-        ]
+        } catch (error:any) {
+            console.error('Error fetching booking data:', error);
+            toast.error(error?.response?.data?.message||"An unexpected error occure")
+            setBookingData([]);
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const currentBookings = activeTab === 'upcoming' ? bookingData.upcoming : bookingData.past;
+    // Submit booking rating
+    const bookingRating = async () => {
+        if (!selectedBookingId || !rating) {
+            toast.error('Please provide a rating');
+            return;
+        }
 
-    const handleRateExperience = () => {
+        try {
+            const data = {
+                booking_id: selectedBookingId.toString(),
+                rating: rating.toString(),
+                comment: feedback,
+            };
+            
+            const response = await bookRating(data as any) as any;
+            if (response.status) {
+                toast.success(response.message || 'Rating submitted successfully');
+                setShowRatingPopup(false);
+                setRating(0);
+                setFeedback('');
+                setHoveredStar(0);
+                setSelectedBookingId(null);
+                // Refresh the booking data
+                getBookingData("Confirmed");
+            } else {
+                toast.error(response.message || 'Failed to submit rating');
+            }
+        } catch (error : any) {
+            console.error('Error submitting rating:', error);
+            toast.error(error.response.data.message||'An error occurred while submitting rating');
+        }
+    };
+
+    useEffect(() => {
+        getBookingData("past");
+    }, [language]);
+
+    const handleRateExperience = (bookingId: number) => {
+        setSelectedBookingId(bookingId);
         setShowRatingPopup(true);
         setRating(0);
         setFeedback('');
         setHoveredStar(0);
     };
 
-    const handleStarClick = (starValue:any) => {
+    const handleStarClick = (starValue: number) => {
         setRating(starValue);
     };
 
-    const handleStarHover = (starValue:any) => {
+    const handleStarHover = (starValue: number) => {
         setHoveredStar(starValue);
-    };
-
-    const handleSubmitRating = () => {
-        // Handle rating submission
-        console.log('Rating submitted:', { rating, feedback });
-        setShowRatingPopup(false);
-        setRating(0);
-        setFeedback('');
-        setHoveredStar(0);
     };
 
     const handleCancel = () => {
@@ -88,68 +137,78 @@ const RateRental=() => {
         setRating(0);
         setFeedback('');
         setHoveredStar(0);
+        setSelectedBookingId(null);
+    };
+
+    // Format date helper function
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString();
+    };
+
+    // Format time helper function  
+    const formatTime = (dateString: string) => {
+        const date = new Date(dateString);
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    };
+
+    // Get status color
+    const getStatusColor = (status: string) => {
+        switch (status.toLowerCase()) {
+            case 'confirmed':
+                return 'bg-green-600';
+            case 'pending':
+                return 'bg-yellow-600';
+            case 'completed':
+                return 'bg-blue-600';
+            case 'cancelled':
+                return 'bg-red-600';
+            default:
+                return 'bg-gray-600';
+        }
     };
 
     return (
         <div className="max-w-4xl">
             {/* Header */}
             <div className="mb-8">
-                <h1 className="text-2xl font-semibold hidden md:block text-white">{t('user.menu.rateRental')}</h1>
+                <h1 className="text-2xl font-semibold hidden md:block text-white">
+                    {t('user.menu.rateRental')}
+                </h1>
             </div>
 
-            {/* Main Content Container */}
             <div className="rounded-lg">
-                {/* Tabs */}
-                <div className="flex">
-                    <button
-                        onClick={() => setActiveTab('upcoming')}
-                        className={`px-6 py-4 text-sm font-medium transition-colors ${
-                            activeTab === 'upcoming'
-                                ? 'text-gray-400 bg-gray-700 rounded-full'
-                                : 'text-gray-700 hover:text-white'
-                        }`}
-                    >
-                        {t('user.profile.rentalHistory.upcomingBooking')} 
-                    </button>
-                    <button
-                        onClick={() => setActiveTab('past')}
-                        className={`px-6 py-4 text-sm font-medium transition-colors ${
-                            activeTab === 'past'
-                                ? 'text-gray-400 bg-gray-700 rounded-full'
-                                : 'text-gray-700 hover:text-white'
-                        }`}
-                    >
-                         {t('user.profile.rentalHistory.pastBooking')} 
-                    </button>
-                </div>
 
-                {/* Bookings List */}
+                {loading && (
+                    <div className="text-center py-12">
+                        <p className="text-gray-400 text-lg">Loading bookings...</p>
+                    </div>
+                )}
+
                 <div className="p-6 space-y-6">
-                    {currentBookings.length === 0 ? (
+                    {!loading && bookingData.length === 0 ? (
                         <div className="text-center py-12">
                             <p className="text-gray-400 text-lg">
-                                No {activeTab} bookings found
+                                No confirmed bookings found
                             </p>
                         </div>
                     ) : (
-                        currentBookings.map((booking) => (
+                        bookingData.map((booking) => (
                             <div key={booking.id} className="space-y-4">
-                                {/* Booking Date */}
                                 <div className="text-white text-sm">
-                                    <span className="font-medium">{t('user.profile.rentalHistory.bookingDate')}: </span>
-                                    <span>{booking.bookingDate}</span>
+                                    <span className="font-medium">
+                                        {t('user.profile.rentalHistory.bookingDate')}: 
+                                    </span>
+                                    <span> {formatDate(booking.created_at)}</span>
                                 </div>
 
-                                {/* Booking Card */}
                                 <div className="border border-gray-700 rounded-lg p-4">
                                     <div className="flex items-center justify-between">
-                                        {/* Car Info */}
                                         <div className="flex items-center gap-4">
-                                            {/* Car Image */}
                                             <div className="w-20 h-15 bg-gray-700 rounded-lg flex items-center justify-center overflow-hidden">
                                                 <img 
-                                                    src={booking.car.image} 
-                                                    alt={booking.car.name}
+                                                    src={booking.car_details.thumbnail_image} 
+                                                    alt={`${booking.car_details.brand} ${booking.car_details.model}`}
                                                     className="w-full h-full object-cover"
                                                     onError={(e) => {
                                                         (e.target as any).style.display = 'none';
@@ -161,49 +220,65 @@ const RateRental=() => {
                                                 </div>
                                             </div>
 
-                                            {/* Car Details */}
                                             <div className="space-y-1">
                                                 <div className="flex items-center gap-3">
                                                     <h3 className="text-white font-medium text-lg">
-                                                        {booking.car.name}
+                                                        {booking.car_details.brand} {booking.car_details.model} ({booking.car_details.year})
                                                     </h3>
-                                                    <span className={`px-2 py-1 rounded text-xs font-medium text-white ${booking.statusColor}`}>
+                                                    <span className={`px-2 py-1 rounded text-xs font-medium text-white ${getStatusColor(booking.status)}`}>
                                                         {booking.status}
                                                     </span>
                                                 </div>
                                                 <p className="text-gray-400 text-sm">
-                                                    {booking.car.type}
+                                                    {booking.car_details.color} • {booking.car_details.car_number}
                                                 </p>
                                                 <p className="text-gray-400 text-sm">
-                                                    {t('user.profile.rentalHistory.amountPaid')}: <span className="text-white">{booking.amount}</span>
+                                                    {t('user.profile.rentalHistory.amountPaid')}: 
+                                                    <span className="text-white"> €{booking.total_amount}</span>
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
 
-                                    {/* Trip Details */}
                                     <div className="mt-4 pt-4 border-t border-gray-700 flex justify-between text-sm">
                                         <div>
-                                            <span className="text-gray-400">{t('user.profile.rentalHistory.tripStartDateAndTime')}: </span>
+                                            <span className="text-gray-400">
+                                                {t('user.profile.rentalHistory.tripStartDateAndTime')}: 
+                                            </span>
                                             <span className="text-white">
-                                                {booking.tripStart.date}, {booking.tripStart.time}
+                                                {formatDate(booking.start_date)}, {formatTime(booking.start_date)}
                                             </span>
                                         </div>
                                         <div>
-                                            <span className="text-gray-400">{t('user.profile.rentalHistory.tripEndDateAndTime')}: </span>
+                                            <span className="text-gray-400">
+                                                {t('user.profile.rentalHistory.tripEndDateAndTime')}: 
+                                            </span>
                                             <span className="text-white">
-                                                {booking.tripEnd.date}, {booking.tripEnd.time}
+                                                {formatDate(booking.end_date)}, {formatTime(booking.end_date)}
                                             </span>
                                         </div>
                                     </div>
 
+                                    <div className="mt-2 text-sm text-gray-400">
+                                        <span>Total Days: </span>
+                                        <span className="text-white">{booking.total_days}</span>
+                                        <span className="ml-4">Booking ID: </span>
+                                        <span className="text-white">{booking.booking_id}</span>
+                                    </div>
+
                                     <div className="mt-4 pt-4 border-t border-gray-700 flex justify-end text-sm">
-                                        <button
-                                            onClick={() => handleRateExperience(booking.id)}
-                                            className="flex items-center gap-2 bg-[#F3B753] text-black px-3 py-2 rounded-sm transition-colors text-sm font-medium hover:bg-[#e6a945]"
-                                        >
-                                       {t('user.profile.rentalHistory.rateExperience')}
-                                        </button>
+                                        {booking.rating_details ? (
+                                            <div className="text-gray-400 text-sm">
+                                                Already rated
+                                            </div>
+                                        ) : (
+                                            <button
+                                                onClick={() => handleRateExperience(booking.id)}
+                                                className="flex items-center gap-2 bg-[#F3B753] text-black px-3 py-2 rounded-sm transition-colors text-sm font-medium hover:bg-[#e6a945]"
+                                            >
+                                                {t('user.profile.rentalHistory.rateExperience')}
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -212,11 +287,9 @@ const RateRental=() => {
                 </div>
             </div>
 
-            {/* Rating Popup */}
             {showRatingPopup && (
                 <div className="fixed inset-0 bg-[#000000a1] bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-[#1D1B11] border border-[#F3B753] rounded-lg p-6 w-full max-w-md mx-4">
-                        {/* Header */}
                         <div className="flex justify-between items-center mb-4">
                             <h2 className="text-xl font-semibold text-white">Rate your Experience</h2>
                             <button
@@ -227,12 +300,10 @@ const RateRental=() => {
                             </button>
                         </div>
 
-                        {/* Subtitle */}
                         <p className="text-gray-400 text-sm mb-6">
-                            Help us improve our tool to best suit your needs by rating us here!
+                            Help us improve our service to best suit your needs by rating us here!
                         </p>
 
-                        {/* Star Rating */}
                         <div className="flex justify-center gap-2 mb-6">
                             {[1, 2, 3, 4, 5].map((star) => (
                                 <button
@@ -254,14 +325,25 @@ const RateRental=() => {
                             ))}
                         </div>
 
-                        {/* Feedback Text */}
+                        {rating > 0 && (
+                            <div className="text-center mb-4">
+                                <p className="text-white">
+                                    {rating === 1 && "Poor"}
+                                    {rating === 2 && "Fair"} 
+                                    {rating === 3 && "Good"}
+                                    {rating === 4 && "Very Good"}
+                                    {rating === 5 && "Excellent"}
+                                </p>
+                            </div>
+                        )}
+
                         <div className="mb-6">
                             <p className="text-white font-medium mb-2">Can you tell us more?</p>
                             <textarea
                                 value={feedback}
                                 onChange={(e) => setFeedback(e.target.value)}
-                                placeholder="Fast and easy to use tool."
-                                className="w-full h-24 px-3 py-2 bg-white border border-gray-600 rounded-md text-white placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-[#F3B753] focus:border-transparent"
+                                placeholder="Tell us about your experience..."
+                                className="w-full h-24 px-3 py-2 bg-gray-800 border border-gray-600 rounded-md text-white placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-[#F3B753] focus:border-transparent"
                             />
                         </div>
 
@@ -274,8 +356,9 @@ const RateRental=() => {
                                 Cancel
                             </button>
                             <button
-                                onClick={handleSubmitRating}
-                                className="flex-1 px-4 py-2 bg-[#F3B753]  text-black rounded-md hover:bg-[#e6a945] transition-colors font-medium"
+                                onClick={bookingRating}
+                                disabled={rating === 0}
+                                className="flex-1 px-4 py-2 bg-[#F3B753] text-black rounded-md hover:bg-[#e6a945] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 Submit
                             </button>

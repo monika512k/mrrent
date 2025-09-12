@@ -11,6 +11,7 @@
   "dependencies": {
     "@auth/core": "^0.39.1",
     "@hookform/resolvers": "^5.0.1",
+    "@tanstack/react-table": "^8.21.3",
     "@types/axios": "^0.9.36",
     "autoprefixer": "^10.4.21",
     "axios": "^1.9.0",

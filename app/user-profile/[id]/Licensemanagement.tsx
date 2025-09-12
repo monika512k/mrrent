@@ -14,10 +14,10 @@ interface userData {
 }
 interface AccountDetailsProps {
     userData: userData;
-    
+    setSelectedMenu: (menuId: string) => void;
 }
 
-const LicenseManagement: React.FC<AccountDetailsProps> = ({ userData }) => {
+const LicenseManagement: React.FC<AccountDetailsProps> = ({ userData,setSelectedMenu }) => {
   const [uploadedFiles, setUploadedFiles] = useState<any>({
     front: null,
     back: null
@@ -130,9 +130,7 @@ const LicenseManagement: React.FC<AccountDetailsProps> = ({ userData }) => {
 
 
    const response =  await uploadLicence(formDataToSend) as any
-   console.log("response",response)
-      
-      if (response.ok) {
+      if (response.status) {
         const result = await response.json();
         setSubmitStatus({
           type: 'success',
@@ -146,20 +144,17 @@ const LicenseManagement: React.FC<AccountDetailsProps> = ({ userData }) => {
           message: errorData.message || 'Failed to upload license. Please try again.'
         });
       }
-    } catch (error) {
+    } catch (error:any) {
+
       setSubmitStatus({
         type: 'error',
-        message: 'Network error. Please check your connection and try again.'
+        message: error?.response?.data?.message||'Network error. Please check your connection and try again.'
       });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-
-  useEffect(()=>{
-    console.log("userData",userData)
-  },[])
 
   type LicenseSide = "front" | "back";
   interface UploadAreaProps {
@@ -264,7 +259,7 @@ const LicenseManagement: React.FC<AccountDetailsProps> = ({ userData }) => {
         </div>
         <button className="flex items-center gap-2 text-[#F3B753] hover:text-[#F3B753]/80 transition-colors">
           <Calendar className="w-4 h-4" />
-          <span className="text-sm">History</span>
+          <span className="text-sm" onClick={() => setSelectedMenu("licence-history")}>History</span>
         </button>
       </div>
 
@@ -325,7 +320,6 @@ const LicenseManagement: React.FC<AccountDetailsProps> = ({ userData }) => {
                 disabled={isSubmitting}
                 className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-600 rounded-lg text-white focus:outline-none focus:border-[#F3B753] transition-colors pr-10 disabled:opacity-50"
               />
-              <Calendar className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
             </div>
           </div>
 
@@ -341,7 +335,6 @@ const LicenseManagement: React.FC<AccountDetailsProps> = ({ userData }) => {
                 disabled={isSubmitting}
                 className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-600 rounded-lg text-white focus:outline-none focus:border-[#F3B753] transition-colors pr-10 disabled:opacity-50"
               />
-              <Calendar className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
             </div>
           </div>
 
@@ -357,7 +350,6 @@ const LicenseManagement: React.FC<AccountDetailsProps> = ({ userData }) => {
                 disabled={isSubmitting}
                 className="w-full px-4 py-3 bg-[#1a1a1a] border border-gray-600 rounded-lg text-white focus:outline-none focus:border-[#F3B753] transition-colors pr-10 disabled:opacity-50"
               />
-              <Calendar className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
             </div>
           </div>
         </div>
@@ -365,7 +357,7 @@ const LicenseManagement: React.FC<AccountDetailsProps> = ({ userData }) => {
         <div className="flex justify-end">
           <button 
             onClick={handleSubmit}
-            className="px-8 py-3 w-full md:w-[300px] bg-[#F3B753] text-black font-medium rounded-lg hover:bg-[#F3B753]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="px-8 py-3 w-full md:w-[300px] bg-[#F3B753] text-black font-medium rounded-lg hover:bg-[#F3B753]/90 transition-colors disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
             disabled={!uploadedFiles.front || !uploadedFiles.back || !formData.licenseNumber || !formData.expiryDate || isSubmitting}
           >
             {isSubmitting ? (

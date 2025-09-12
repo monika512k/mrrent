@@ -213,13 +213,11 @@ function ReviewBookingContent() {
           url: 'booking/create/',
           data: payload,
           auth: true
-        }) as APIResponse;
+        }) as any;
         
-        if (result?.status) {
-          router.push(`/payment-success?details=${encodeURIComponent(JSON.stringify(result.data))}`);
-        } else {
-          router.push(`/payment-failed`);
-        }
+        if (result?.data?.payment?.checkout_url) {
+          window.location.href = result?.data?.payment?.checkout_url;
+        } 
         setShowAgreement(false);
       } catch (error) {
         console.error('Error during booking creation:', error);
@@ -352,7 +350,7 @@ function ReviewBookingContent() {
           <button
             onClick={handleCheckout}
             disabled={calculationLoading}
-            className="w-full lg:max-w-[540px] max-w-[320px] h-[57.6px] bg-[#F3B753] text-black font-bold lg:text-xl text-lg rounded-lg lg:mt-10 mt-6 lg:mb-14 mb-8 hover:bg-[#e3a640] transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full lg:max-w-[540px] max-w-[320px] h-[57.6px] bg-[#F3B753] text-black font-bold lg:text-xl text-lg rounded-lg lg:mt-10 mt-6 lg:mb-14 mb-8 hover:bg-[#e3a640] transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
             {agreementLoading ? "Checking out..." : calculationLoading ? "Calculating..." : "Checkout"}
           </button>

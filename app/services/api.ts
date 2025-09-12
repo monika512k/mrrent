@@ -221,6 +221,21 @@ export const getCarList = async (params: CarListParams , language: String) => {
     throw error;
   }
 };
+export const bookingList = async (type:String,language: String) => {
+  try {
+  const query = type ? `type=${type}&` : "";
+const response = await axios.get(`${BASE_URL}/booking/list/?${query}selected_language=${language}`,{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching car list:', error);
+    throw error;
+  }
+};
 
 
    export const carDetail = async (car_id: string,selected_language: string) => {
@@ -292,7 +307,22 @@ export const getCarList = async (params: CarListParams , language: String) => {
     throw error;
   }
 };
+export const licenceList = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/licenses/`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      }
+    });
 
+    console.log('Licence list:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching licence status:', error);
+    throw error;
+  }
+};
  export const uploadLicence = async  (formDataToSend: FormData) => {
   try {
     const response = await axios.post(`${BASE_URL}/api/upload-image/`,formDataToSend, {
@@ -361,4 +391,38 @@ export const carBookingCalculationAPI = async ({ url, data = {}, auth = false }:
     }
   );
   return res.data;
+};
+
+export const downloadInvoice = async (id:any) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/booking/invoice/123/download/`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    console.log('download invoice:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching licence status:', error);
+    throw error;
+  }
+};
+
+export const bookRating = async (data: any) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/booking/rating/`,data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    console.log('booking rating :', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching licence status:', error);
+    throw error;
+  }
 };

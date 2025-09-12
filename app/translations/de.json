@@ -40,7 +40,20 @@
         "label": "Rückgabedatum",
         "error": "Rückgabedatum ist erforderlich"
       },
-      "submitButton": "Fahrzeug finden"
+      "submitButton": "Fahrzeug finden",
+      "submitButton2": "Aktualisieren"
+    },
+    "filter": {
+      "appliedFilters": "Angewandte Filter",
+      "filters": "Filter",
+      "price": "Preis",
+      "maxPrice": "Maximalpreis",
+      "minPrice": "Minimalpreis",
+      "carType": "Fahrzeugtyp",
+      "transmission": "Getriebe",
+      "fuelType": "Kraftstoffart",
+      "backButton": "Zurück",
+      "clearAllButton": "Alles löschen"
     }
   },
   "auth": {
@@ -118,19 +131,19 @@
         "line2": "Massachusetts 02156 United States"
       }
     },
-     "sidebar": {
-    "dashboard": "Dashboard",
-    "myProfile": "Mein Profil",
-    "myBookings": "Meine Buchungen",
-    "myWishlist": "Meine Wunschliste",
-    "wallet": "Brieftasche",
-    "myReviews": "Meine Bewertungen",
-    "myComplaints": "Meine Beschwerden",
-    "contactSupport": "Kontakt-Support",
-    "logoutConfirmation": "Bist du sicher, dass du dich abmelden möchtest?",
-
-    "logout": "Abmelden"
-  },
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "backToHome": "Zurück zur Startseite",
+      "myProfile": "Mein Profil",
+      "myBookings": "Meine Buchungen",
+      "myWishlist": "Meine Wunschliste",
+      "wallet": "Brieftasche",
+      "myReviews": "Meine Bewertungen",
+      "myComplaints": "Meine Beschwerden",
+      "contactSupport": "Kontakt-Support",
+      "logoutConfirmation": "Bist du sicher, dass du dich abmelden möchtest?",
+      "logout": "Abmelden"
+    },
     "bookingDetails": {
       "title": "Buchungsdetails",
       "details": "Buchungsinformationen",
@@ -192,6 +205,7 @@
       },
       "rentalHistory": {
         "title": "Mietverlauf",
+        "viewDetails": "Details anzeigen",
         "upcomingBooking": "Bevorstehende Buchung",
         "pastBooking": "Vergangene Buchung",
         "bookingDate": "Buchungsdatum",
@@ -199,7 +213,31 @@
         "tripEndDateAndTime": "Enddatum & -uhrzeit der Fahrt",
         "amountPaid": "Bezahlter Betrag",
         "rateExperience": "Erfahrung bewerten"
-      }
+      },
+      "uploadHistory": {
+  "title": "Upload-Verlauf",
+  "totalRecords": "Gesamtdatensätze",
+  "searchAllColumns": "Alle Spalten durchsuchen...",
+  "filters": "Filter",
+  "sNo": "Nr.",
+  "uploadedDate": "Hochgeladen am",
+  "status": "Status",
+  "actionDate": "Aktionsdatum",
+  "licenseView": "Lizenzansicht",
+  "uploadedData": "Hochgeladene Daten",
+  "pending": "Ausstehend",
+  "view": "Ansehen",
+  "licenseNo": "Lizenz-Nr.",
+  "issueDate": "Ausgabedatum",
+  "expiryDate": "Ablaufdatum",
+  "showingResults": "Zeige {from} bis {to} von {total} Ergebnissen",
+  "page": "Seite",
+  "totalRows": "Gesamtzeilen",
+  "apiTotal": "API-Gesamt",
+  "previous": "Zurück",
+  "next": "Weiter"
+}
+
     },
     "menu": {
       "accountDetails": "Kontodetails",

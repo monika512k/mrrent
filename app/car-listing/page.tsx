@@ -112,6 +112,7 @@ const CarListing = () => {
 
     const [priceRange, setPriceRange] = useState<[number, number]>([1, 120000]);
     const [selectedCarTypes, setSelectedCarTypes] = useState([]);
+    const [selectedBodyTypes, setSelectedBodyTypes] = useState([]);
     const [selectedTransmission, setSelectedTransmission] = useState([]);
     const [selectedFuel, setSelectedFuel] = useState([]);
 
@@ -149,6 +150,7 @@ const CarListing = () => {
             selectedFuel,
             selectedTransmission,
             selectedCarTypes,
+            selectedBodyTypes,
             priceRange,
         });
     }, []);
@@ -195,6 +197,10 @@ const CarListing = () => {
                 newFilters.selectedCarTypes = value;
                 setSelectedCarTypes(value);
                 break;
+            case 'bodyTypes':
+                newFilters.selectedBodyTypes = value;
+                setSelectedBodyTypes(value);
+                break;
             case 'priceRange':
                 newFilters.priceRange = value;
                 setPriceRange(value);
@@ -206,6 +212,7 @@ const CarListing = () => {
 
     const clearFilters = useCallback(() => {
         setSelectedCarTypes([]);
+        setSelectedBodyTypes([]);
         setSelectedTransmission([]);
         setSelectedFuel([]);
         setPriceRange([0, 120000]);
@@ -333,6 +340,8 @@ const CarListing = () => {
                             setPriceRange={(value) => handleFilterChange('priceRange', value)}
                             selectedCarTypes={selectedCarTypes}
                             setSelectedCarTypes={(value) => handleFilterChange('carTypes', value)}
+                            selectedBodyTypes={selectedBodyTypes}
+                            setSelectedBodyTypes={(value) => handleFilterChange('bodyTypes', value)}
                             selectedTransmission={selectedTransmission}
                             setSelectedTransmission={(value) => handleFilterChange('transmission', value)}
                             selectedFuel={selectedFuel}
@@ -351,6 +360,8 @@ const CarListing = () => {
                         setPriceRange={(value) => handleFilterChange('priceRange', value)}
                         selectedCarTypes={selectedCarTypes}
                         setSelectedCarTypes={(value) => handleFilterChange('carTypes', value)}
+                        selectedBodyTypes={selectedBodyTypes}
+                        setSelectedBodyTypes={(value) => handleFilterChange('bodyTypes', value)}
                         selectedTransmission={selectedTransmission}
                         setSelectedTransmission={(value) => handleFilterChange('transmission', value)}
                         selectedFuel={selectedFuel}

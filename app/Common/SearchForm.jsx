@@ -32,8 +32,8 @@ const SearchForm = ({ onSubmitOverride, locationList = [], title = "Search", src
     clearErrors,
   } = useForm({
     defaultValues: {
-      pickupDate: currentSearchData?.pickupDate || new Date(Date.now() + 30 * 60000).toISOString().slice(0, 16),
-      dropoffDate: currentSearchData?.dropoffDate || new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString().slice(0, 16),
+      pickupDate: currentSearchData?.pickupDate ||'',
+      dropoffDate: currentSearchData?.dropoffDate || '',
       pickupLocation:  currentSearchData?.pickupLocation ||  '',
       dropoffLocation:  currentSearchData?.dropoffLocation || '',
     },
@@ -289,7 +289,7 @@ const SearchForm = ({ onSubmitOverride, locationList = [], title = "Search", src
               className="flex cursor-pointer items-center justify-center gap-2 border text-[#F3B753] border-[#F3B753] hover:text-[#121212] hover:bg-[#F3B753] font-semibold text-sm rounded-lg lg:px-6 px-4 lg:py-4 py-3 w-full"
              
             >
-              {title || t('hero.form.submitButton')}
+              {t('hero.form.submitButton')}
             </button>
           </div>
         </div>

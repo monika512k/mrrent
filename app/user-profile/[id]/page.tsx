@@ -22,18 +22,22 @@ import BookingDetails from "./BookingDetails";
 import RateRental from "./RateRental";
 import SubmitComplaint from "./SubmitComplaint";
 import ContactSupport from "./ContactSupport";
-
+import LicenceHistory from "./LicenceHistory";
+import type { Booking } from "./BookingDetails";
 const UserProfile = () => {
     const [selectedMenu, setSelectedMenu] = useState("account-details")
+    
+    
+    const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
     const { t } = useLanguage();
     const { id } = useParams();
     const [formData, setFormData] = useState({
-        firstName: "Vimal",
-        lastName: "Kumar",
-        email: "vimalkumar@gmail.com",
-        phone: "+49 1234567890",
-        address: "Ahmedabad Gujarat 382 - India",
-        gender: "male",
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        address: "",
+        gender: "",
         user_id:0
     })
 
@@ -42,18 +46,22 @@ const UserProfile = () => {
             id: "account-details",
             label: `${t('user.menu.accountDetails')}`,
             icon: User,
+            classNames:"pt-2",
             hasSubmenu: false,
+           
         },
         {
             id: "license-management",
             label: `${t('user.menu.licenseManagement')}`,
             icon: FileText,
+            classNames:"",
             hasSubmenu: false,
         },
         {
             id: "rental-history",
             label: `${t('user.menu.rentalHistory')}`,
             icon: History,
+            classNames:"",
             hasSubmenu: false,
         },
         {
@@ -61,9 +69,10 @@ const UserProfile = () => {
             label: `${t('user.menu.feedbackSection')}`,
             icon: MessageSquare,
             hasSubmenu: true,
+            classNames:"pb-2",
             submenu: [
                 { id: "rate-rental", label: `${t('user.menu.rateRental')}`, icon: Star },
-                { id: "submit-complaint", label: `${t('user.menu.submitComplaint')}`, icon: AlertTriangle },
+                // { id: "submit-complaint", label: `${t('user.menu.submitComplaint')}`, icon: AlertTriangle },
                 { id: "contact-support", label: `${t('user.menu.contactSupport')}`, icon: HelpCircle },
             ],
         },
@@ -71,7 +80,6 @@ const UserProfile = () => {
 
     useEffect(() => {
         setSelectedMenu(id as string);
-
     }, [id])
 
     useEffect(()=>{
@@ -79,7 +87,7 @@ const UserProfile = () => {
        },[selectedMenu])
 
     return (
-        <div className="min-h-[80vh] bg-[#1a1a1a] text-white flex items-center">
+        <div className="min-h-[100vh] bg-[#1a1a1a] text-white flex items-center">
             {/* Desktop Sidebar - Hidden on mobile, visible on md and up */}
             <div className="hidden md:block">
                 <ProfileSidebar
@@ -104,20 +112,24 @@ const UserProfile = () => {
                 )}
 
                 {selectedMenu === "license-management" && (
-                    <LicenseManagement userData={formData as any} />
+                    <LicenseManagement userData={formData as any} setSelectedMenu={setSelectedMenu as any}/>
                 )}
 
                 {selectedMenu === "rental-history" && (
                     <RentalHistory 
                     setSelectedMenu={setSelectedMenu as any}
+                    setSelectedBooking={setSelectedBooking as any}
                     formData={formData as any} 
                      />
                 )}
                  {selectedMenu === "booking-details" && (
-                    <BookingDetails onBack={()=>setSelectedMenu("rental-history")} />
+                    <BookingDetails onBack={()=>setSelectedMenu("rental-history")} bookingData={selectedBooking}/>
                 )}
                  {selectedMenu === "rate-rental" && (
                     <RateRental  />
+                )}
+                {selectedMenu === "licence-history" && (
+                    <LicenceHistory  />
                 )}
                 {selectedMenu === "submit-complaint" && (
                     <SubmitComplaint  />

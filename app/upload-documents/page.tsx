@@ -4,7 +4,8 @@ import { UploadCloud, ChevronLeft, Trash2, CheckCircle, Loader2 } from 'lucide-r
 import Image from 'next/image';
 import assets from 'app/assets/assets';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { uploadLicence } from 'app/services/api';
+import {  uploadLicence } from 'app/services/api';
+import { ToastMsg } from 'app/Common/Toast';
 
 interface UploadResult {
   status: boolean;
@@ -373,7 +374,7 @@ const UploadDocumentsContent = () => {
           <button
             type="submit"
             disabled={isUploading}
-            className="w-full max-w-[540px] mx-auto bg-[#F3B753] text-black font-bold text-lg rounded-lg py-4 hover:bg-[#e3a640] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full max-w-[540px] mx-auto bg-[#F3B753] text-black font-bold text-lg rounded-lg py-4 hover:bg-[#e3a640] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
           >
             {isUploading ? (
               <>
@@ -415,7 +416,7 @@ const UploadDocumentsContent = () => {
             <p className="text-[#f6f6f6] text-sm lg:text-lg font-normal">You&apos;ll get an email confirmation once approved, then you can proceed.</p>
             <p className="text-[#f6f6f6] text-sm lg:text-lg font-normal mb-[29.94px]">Meanwhile, check out our other cars.</p>
             <button
-              className="w-[303px] lg:w-[540px] h-[99px] lg:h-[57.6px] bg-[#F3B753] mb-[14.4px] text-black font-semibold text-lg rounded-[5.99px]  hover:bg-[#e3a640] transition"
+              className="w-[303px] lg:w-[540px] h-[99px] lg:h-[57.6px] bg-[#F3B753] mb-[14.4px] text-black font-semibold text-lg rounded-[5.99px]  hover:bg-[#e3a640] transition cursor-pointer"
               onClick={() => {
                 setShowModal(false);
               }}

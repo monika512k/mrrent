@@ -90,7 +90,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
                 {/* Back to Home */}
                 <button className="flex items-center gap-2 relative top-[25px] text-[#F3B753] mb-8 hover:text-[#F3B753] transition-colors">
                     <ArrowLeft className="w-4 h-4" />
-                    <span className="text-sm" onClick={() => window.location.href = '/landing'}>back to Home</span>
+                    <span className="text-sm" onClick={() => window.location.href = '/landing'}>{t("user.sidebar.backToHome")}</span>
                 </button>
 
                 {/* User Profile */}
@@ -109,9 +109,9 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
                 <nav className="space-y-2 shadow-gold rounded-lg" style={{
                     boxShadow: "rgba(243, 184, 83, 0.25) 0px 0.4px 0.4px, rgba(243, 184, 83, 0.15) 0px 0px 1px 1px",
                 }}>
-                    {menuItems.map((item) => (
+                    {menuItems.map((item :any) => (
                         <div key={item.id}>
-                            <div className="px-3">
+                            <div className={`px-3 ${item?.classNames}`}>
                                 <button
                                     onClick={() => {
                                         if (!item.hasSubmenu) {
@@ -157,7 +157,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
                             {/* Submenu */}
                             {item.hasSubmenu && showDropDown === item.id && item.submenu && (
                                 <div className="ml-6 mt-2 space-y-1">
-                                    {item.submenu.map((subItem) => (
+                                    {item.submenu.map((subItem:any) => (
                                         <button
                                             key={subItem.id}
                                             onClick={() => {

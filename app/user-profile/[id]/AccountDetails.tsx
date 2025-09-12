@@ -40,7 +40,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
                 last_name: formData.lastName || '',
                 phone_number: formData.phone || '',
                 address: formData.address || '',
-                email: formData.email||'',
+                // email: formData.email||'',
                 gender: formData.gender||''
 
             };
@@ -49,9 +49,9 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
             setSuccessMessage('Profile updated successfully!');
             setIsEditing(false);
 
-        } catch (error) {
+        } catch (error:any) {
             console.error('Error updating profile:', error);
-            setError(error instanceof Error ? error.message : 'Failed to update profile');
+            setError(error?.response?.data?.message || 'Failed to update profile');
         } finally {
             setIsLoading(false);
         }
@@ -103,13 +103,13 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8">
                     <h1 className="text-2xl font-semibold hidden md:block">{t('user.menu.accountDetails')}</h1>
-                    <button
+                  {!isEditing&&  <button
                         onClick={handleSave}
                         disabled={isLoading}
                         className="bg-transparent border border-gray-600 text-white hover:bg-gray-800 px-4 py-2 rounded disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        {isLoading ?  <Loader2 className="w-4 h-4 animate-spin" /> : (isEditing ? "SAVE" : "EDIT")}
-                    </button>
+                        {isLoading ?  <Loader2 className="w-4 h-4 animate-spin" /> : (!isEditing && "EDIT")}
+                    </button>}
                 </div>
 
                 {/* Status Messages */}
@@ -204,7 +204,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
                                             value="Male"
                                             checked={formData.gender === "Male"}
                                             onChange={(e) => handleInputChange('gender', e.target.value)}
-                                            disabled={!isEditing}
+                                            // disabled={!isEditing}
                                             className="accent-[#F5B544] cursor-pointer"
                                         />
                                         <span className="text-white">{t('auth.signup.gender.male')}</span>
@@ -217,7 +217,7 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
                                             value="Female"
                                             checked={formData.gender === "Female"}
                                             onChange={(e) => handleInputChange('gender', e.target.value)}
-                                            disabled={!isEditing}
+                                            // disabled={!isEditing}
                                             className="accent-[#F5B544] cursor-pointer"
                                         />
                                         <span className="text-white">{t('auth.signup.gender.female')}</span>

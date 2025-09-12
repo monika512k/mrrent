@@ -40,7 +40,20 @@
         "label": "Dropoff Date",
         "error": "Dropoff date is required"
       },
-      "submitButton": "Find a Vehicle"
+      "submitButton": "Search",
+      "submitButton2": "Update"
+    },
+    "filter": {
+      "appliedFilters":"Applied Filters",
+      "price":"Price",
+      "filters": "Filters",
+      "maxPrice":"Max Price",
+      "minPrice":"Min Price",
+      "carType":"Car Type",
+      "transmission":"Transmission",
+      "fuelType":"Fuel Type",
+      "backButton": "Back",
+      "clearAllButton": "Clear All"
     }
   },
   "auth": {
@@ -110,6 +123,7 @@
     "save": "License",
     "sidebar": {
       "dashboard": "Dashboard",
+      "backToHome":"Back to Home",
       "myProfile": "My Profile",
       "myBookings": "My Bookings",
       "myWishlist": "My Wishlist",
@@ -190,6 +204,7 @@
         "documentSupported": "Supported formats: PDF, JPG, PNG (Max 10MB)"
       },
       "rentalHistory": {
+        "viewDetails":"View Details",
         "title": "Rental History",
         "upcomingBooking": "Upcoming Booking",
         "pastBooking": "Past Booking",
@@ -198,7 +213,32 @@
         "tripEndDateAndTime": "Trip End Date & Time",
         "amountPaid": "Amount Paid",
         "rateExperience": "Rate Experience"
-      }
+      },
+      "uploadHistory": {
+  "title": "Upload History",
+  "totalRecords": "Total Records",
+  "searchAllColumns": "Search all columns...",
+  "filters": "Filters",
+  "sNo": "S. No.",
+  "uploadedDate": "Uploaded Date",
+  "status": "Status",
+  "actionDate": "Action Date",
+  "licenseView": "License View",
+  "uploadedData": "Uploaded Data",
+  "pending": "Pending",
+  "view": "View",
+  "licenseNo": "License No.",
+  "issueDate": "Issue Date",
+  "expiryDate": "Expiry Date",
+  "showingResults": "Showing {from} to {to} of {total} results",
+  "page": "Page",
+  "totalRows": "Total Rows",
+  "apiTotal": "API Total",
+  "previous": "Previous",
+  "next": "Next"
+}
+
+
     },
     "menu": {
       "accountDetails": "Account Details",
