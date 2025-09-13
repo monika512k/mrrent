@@ -27,29 +27,41 @@ export const getTestimonials = async (selected_language: string): Promise<Testim
   try {
     const response = await fetch(`${BASE_URL}/api/testimonial/?selected_language=${selected_language}`);
     return response.json();
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching testimonials:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
+    }
     throw error;
   }
 };
 
-export const getCars = async ({used_for,selected_language,car_type}: { used_for: string; selected_language: string,car_type:string }): Promise<Car[]> => {
-    
+export const getCars = async ({ used_for, selected_language, car_type }: { used_for: string; selected_language: string, car_type: string }): Promise<Car[]> => {
+
   try {
     const response = await fetch(`${BASE_URL}/car/car_list/?used_for=${used_for}&selected_language=${selected_language}&car_type=${car_type}`);
     return response.json();
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching cars:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
+    }
     throw error;
   }
 };
 
-export const getCarsTypes = async ({used_for,selected_language}: { used_for: string; selected_language: string }): Promise<CarType[]> => {
+export const getCarsTypes = async ({ used_for, selected_language }: { used_for: string; selected_language: string }): Promise<CarType[]> => {
   try {
     const response = await fetch(`${BASE_URL}/car/car_type/?used_for=${used_for}&selected_language=${selected_language}`);
     return response.json();
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching cars:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
+    }
     throw error;
   }
 };
@@ -59,8 +71,12 @@ export const getBodyTypes = async ({ used_for, selected_language }: { used_for: 
   try {
     const response = await fetch(`${BASE_URL}/car/body_type/?used_for=${used_for}&selected_language=${selected_language}`);
     return response.json();
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching body types:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
+    }
     throw error;
   }
 };
@@ -74,8 +90,12 @@ export const getTransmissions = async ({ used_for, selected_language }: { used_f
     const query = params.length ? `?${params.join('&')}` : '';
     const response = await fetch(`${BASE_URL}/car/transmissions/${query}`);
     return response.json();
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching transmissions:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
+    }
     throw error;
   }
 };
@@ -89,8 +109,12 @@ export const getFuelTypes = async ({ used_for, selected_language }: { used_for?:
     const query = params.length ? `?${params.join('&')}` : '';
     const response = await fetch(`${BASE_URL}/car/fuel_type/${query}`);
     return response.json();
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching fuel types:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
+    }
     throw error;
   }
 };
@@ -118,86 +142,86 @@ export const signUpiApi = async (reqBody: SignupRequest) => {
     throw error;
   }
 };
-  
 
 
-   export const otpVerify = async (reqBody: { email: string; otp: string; verify_type: string }) => {
-    try {
-      const response = await axios.post(`${BASE_URL}/api/verify-otp/`, reqBody);
-      return response.data;
-    } catch (error) {
-      console.error('Error during OTP verification:', error);
-      throw error;
-    }
-  };
 
-   export const resendOtp = async (reqBody: { email: string; verify_type: string }) => {
-    try {
-      let body: { email: string; verify_type?: string } = {
-        email: reqBody.email,
-      };
-      if(reqBody.verify_type){
-        body['verify_type'] = reqBody.verify_type;
-      }
-      const response = await axios.post(`${BASE_URL}/api/resent-otp/`, body);
-      return response.data;
-    } catch (error) {
-      console.error('Error during OTP resending:', error);
-      throw error;
-    }
-  };
-
-  export interface LoginResponse {
-    status: boolean;
-    response?: {
-      data?: {
-        error_type?: string;
-      };
-    };
+export const otpVerify = async (reqBody: { email: string; otp: string; verify_type: string }) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/api/verify-otp/`, reqBody);
+    return response.data;
+  } catch (error) {
+    console.error('Error during OTP verification:', error);
+    throw error;
   }
-  
-  export const login = async (reqBody: {
-    email: string;
-    password: string;
-  }): Promise<LoginResponse> => {
-    try {
-      const response = await axios.post(`${BASE_URL}/api/login/`, reqBody);
-      return response?.data as LoginResponse;
-    } catch (error) {
-      console.error("Error during login:", error);
-      throw error;
-    }
-  };
+};
 
-    export const socialLogin = async (reqBody: any) => {
-    try {
-      const response = await axios.post(`${BASE_URL}/api/social-login/`, reqBody);
-      return response?.data ;
-    } catch (error) {
-      console.error("Error during login:", error);
-     throw  error;
+export const resendOtp = async (reqBody: { email: string; verify_type: string }) => {
+  try {
+    let body: { email: string; verify_type?: string } = {
+      email: reqBody.email,
+    };
+    if (reqBody.verify_type) {
+      body['verify_type'] = reqBody.verify_type;
     }
-  };
+    const response = await axios.post(`${BASE_URL}/api/resent-otp/`, body);
+    return response.data;
+  } catch (error) {
+    console.error('Error during OTP resending:', error);
+    throw error;
+  }
+};
 
-     export const socialSignUp = async (reqBody: any) => {
-    try {
-      const response = await axios.post(`${BASE_URL}/api/social-singup/`, reqBody);
-      return response?.data ;
-    } catch (error) {
-      console.error("Error during signup:", error);
-      throw error;
-    }
+export interface LoginResponse {
+  status: boolean;
+  response?: {
+    data?: {
+      error_type?: string;
+    };
   };
+}
 
-     export const resetPassword = async (reqBody: { email: string; new_password: string; confirm_password: string }) => {
-    try {
-      const response = await axios.post(`${BASE_URL}/api/reset-password/`, reqBody);
-      return response.data;
-    } catch (error) {
-      console.error('Error during password reset:', error);
-      throw error;
-    }
-  };
+export const login = async (reqBody: {
+  email: string;
+  password: string;
+}): Promise<LoginResponse> => {
+  try {
+    const response = await axios.post(`${BASE_URL}/api/login/`, reqBody);
+    return response?.data as LoginResponse;
+  } catch (error) {
+    console.error("Error during login:", error);
+    throw error;
+  }
+};
+
+export const socialLogin = async (reqBody: any) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/api/social-login/`, reqBody);
+    return response?.data;
+  } catch (error) {
+    console.error("Error during login:", error);
+    throw error;
+  }
+};
+
+export const socialSignUp = async (reqBody: any) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/api/social-singup/`, reqBody);
+    return response?.data;
+  } catch (error) {
+    console.error("Error during signup:", error);
+    throw error;
+  }
+};
+
+export const resetPassword = async (reqBody: { email: string; new_password: string; confirm_password: string }) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/api/reset-password/`, reqBody);
+    return response.data;
+  } catch (error) {
+    console.error('Error during password reset:', error);
+    throw error;
+  }
+};
 interface CarListParams {
   fuel_type?: string;
   car_type?: string;
@@ -211,87 +235,111 @@ interface CarListParams {
   selected_language: string
 }
 
-export const getCarList = async (params: CarListParams , language: String) => {
+export const getCarList = async (params: CarListParams, language: String) => {
   try {
     const query = new URLSearchParams(params as any).toString();
     const response = await axios.get(`${BASE_URL}/car/car_list/?${query}&selected_language=${language}`);
     return response.data;
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching car list:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
+    }
     throw error;
   }
 };
-export const bookingList = async (type:String,language: String) => {
+export const bookingList = async (type: String, language: String) => {
   try {
-  const query = type ? `type=${type}&` : "";
-const response = await axios.get(`${BASE_URL}/booking/list/?${query}selected_language=${language}`,{
+    const query = type ? `type=${type}&` : "";
+    const response = await axios.get(`${BASE_URL}/booking/list/?${query}selected_language=${language}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json'
       }
     });
     return response.data;
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching car list:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
+    }
     throw error;
   }
 };
 
 
-   export const carDetail = async (car_id: string,selected_language: string) => {
-    try {
-      const response = await axios.get(`${BASE_URL}/car/car_list/?car_id=${car_id}&selected_language=${selected_language}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error during car detail fetch:', error);
-      throw error;
+export const carDetail = async (car_id: string, selected_language: string) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/car/car_list/?car_id=${car_id}&selected_language=${selected_language}`);
+    return response.data;
+  } catch (error:any) {
+    console.error('Error during car detail fetch:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
     }
-  };
+    throw error;
+  }
+};
 
-     export const locations = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/master/operating_locations/`);
-      return response.data;
-    } catch (error) {
-      console.error('Error during car detail fetch:', error);
-      throw error;
+export const locations = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/master/operating_locations/`);
+    return response.data;
+  } catch (error:any) {
+    console.error('Error during car detail fetch:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
     }
-  };
-  export const operationLocation = async (selected_language:string) => {
-  
-  
-    try {
-      const response = await axios.get(`${BASE_URL}/master/operating_locations/?selected_language=${selected_language}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching pickup location:', error);
-      throw error;
+    throw error;
+  }
+};
+export const operationLocation = async (selected_language: string) => {
+
+
+  try {
+    const response = await axios.get(`${BASE_URL}/master/operating_locations/?selected_language=${selected_language}`);
+    return response.data;
+  } catch (error:any) {
+    console.error('Error fetching pickup location:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
     }
-  };
+    throw error;
+  }
+};
 
 
-  export const updateProfile = async(reqBody: {
-    first_name: string;
-    last_name: string;
-    phone_number: string;
-    address: string;
-  }) => {
-    try {
-      const response = await axios.patch(`${BASE_URL}/api/update-profile/`, reqBody, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}` // Assuming token is stored in localStorage
-        } 
-      })
-      return response.data;
-    } catch (error) {
-      console.error('Error during profile update:', error);
-      throw error;
+export const updateProfile = async (reqBody: {
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  address: string;
+}) => {
+  try {
+    const response = await axios.patch(`${BASE_URL}/api/update-profile/`, reqBody, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}` // Assuming token is stored in localStorage
+      }
+    })
+    return response.data;
+  } catch (error:any) {
+    console.error('Error during profile update:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
     }
-  };
+    throw error;
+  }
+};
 
 
-  export const getProfile = async  () => {
+export const getProfile = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/api/get-profile/`, {
       headers: {
@@ -302,8 +350,12 @@ const response = await axios.get(`${BASE_URL}/booking/list/?${query}selected_lan
 
     console.log('Profile Data:', response.data);
     return response.data;
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching profile:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
+    }
     throw error;
   }
 };
@@ -318,14 +370,18 @@ export const licenceList = async () => {
 
     console.log('Licence list:', response.data);
     return response.data;
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching licence status:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
+    }
     throw error;
   }
 };
- export const uploadLicence = async  (formDataToSend: FormData) => {
+export const uploadLicence = async (formDataToSend: FormData) => {
   try {
-    const response = await axios.post(`${BASE_URL}/api/upload-image/`,formDataToSend, {
+    const response = await axios.post(`${BASE_URL}/api/upload-image/`, formDataToSend, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'multipart/form-data'
@@ -334,8 +390,12 @@ export const licenceList = async () => {
 
     console.log('Upload Licence:', response.data);
     return response.data;
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching profile:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
+    }
     throw error;
   }
 };
@@ -351,8 +411,12 @@ export const licenceStatus = async () => {
 
     console.log('Licence Status:', response.data);
     return response.data;
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching licence status:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
+    }
     throw error;
   }
 };
@@ -369,8 +433,7 @@ export const getDiscount = async (id: any) => {
     return response.data;
   } catch (error: any) {
     console.error('Error fetching discounts:', error);
-    if(!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid"){
-      ToastMsg("Please login to book a car", "error");
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
       window.location.href = "/login";
       throw new Error("Car not available");
     }
@@ -378,22 +441,32 @@ export const getDiscount = async (id: any) => {
   }
 };
 export const carBookingCalculationAPI = async ({ url, data = {}, auth = false }: { url: string, data: any, auth?: boolean }) => {
-  const token = localStorage.getItem('token');
-  if (auth && !token) throw new Error('Authentication token required');
+  try {
+    const token = localStorage.getItem('token');
+    if (auth && !token) throw new Error('Authentication token required');
 
-  const res = await axios.post(
-    `${BASE_URL}/${url}`,data,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        ...(auth && { Authorization: `Bearer ${token}` })
+    const res = await axios.post(
+      `${BASE_URL}/${url}`, data,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          ...(auth && { Authorization: `Bearer ${token}` })
+        }
       }
+    );
+    return res.data;
+  } catch (error: any) {
+    console.error('Error fetching licence status:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      ToastMsg("Please login to book a car", "error");
+      window.location.href = "/login";
+      throw new Error("Car not available");
     }
-  );
-  return res.data;
+    throw error;
+  }
 };
 
-export const downloadInvoice = async (id:any) => {
+export const downloadInvoice = async (id: any) => {
   try {
     const response = await axios.get(`${BASE_URL}/booking/invoice/123/download/`, {
       headers: {
@@ -404,15 +477,19 @@ export const downloadInvoice = async (id:any) => {
 
     console.log('download invoice:', response.data);
     return response.data;
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching licence status:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
+    }
     throw error;
   }
 };
 
 export const bookRating = async (data: any) => {
   try {
-    const response = await axios.post(`${BASE_URL}/booking/rating/`,data, {
+    const response = await axios.post(`${BASE_URL}/booking/rating/`, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json'
@@ -421,8 +498,12 @@ export const bookRating = async (data: any) => {
 
     console.log('booking rating :', response.data);
     return response.data;
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching licence status:', error);
+    if (!error?.response?.data?.status && error?.response?.data?.code == "token_not_valid") {
+      window.location.href = "/login";
+      throw new Error("Car not available");
+    }
     throw error;
   }
 };
