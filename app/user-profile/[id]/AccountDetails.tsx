@@ -103,13 +103,13 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8">
                     <h1 className="text-2xl font-semibold hidden md:block">{t('user.menu.accountDetails')}</h1>
-                  {!isEditing&&  <button
+                   <button
                         onClick={handleSave}
-                        disabled={isLoading}
+                        disabled={isLoading||isEditing}
                         className="bg-transparent border border-gray-600 text-white hover:bg-gray-800 px-4 py-2 rounded disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        {isLoading ?  <Loader2 className="w-4 h-4 animate-spin" /> : (!isEditing && "EDIT")}
-                    </button>}
+                       EDIT
+                    </button>
                 </div>
 
                 {/* Status Messages */}
@@ -228,13 +228,13 @@ const AccountDetails: React.FC<AccountDetailsProps> = ({
                     </div>
 
                     <div className="flex justify-end md:justify-end">
-                        <button
+                     {  isEditing&& <button
                             onClick={profileUpdates}
                             disabled={isLoading || !isEditing}
-                            className="px-8 py-3 w-full md:w-[200px] bg-[#F3B753] text-black font-medium rounded-lg hover:bg-[#F3B753]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="px-8 py-3 w-full md:w-[315px] bg-[#F3B753] text-black font-medium rounded-lg hover:bg-[#F3B753]/90 transition-colors disabled:opacity-50 cursor-pointer flex justify-center"
                         >
                             {isLoading ?  <Loader2 className="w-4 h-4 animate-spin" /> : t('user.save')}
-                        </button>
+                        </button>}
                     </div>
                 </div>
             </div>

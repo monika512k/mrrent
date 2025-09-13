@@ -347,7 +347,7 @@ const CarDescription = () => {
               </div>
              
               <div className="flex flex-col gap-[17.8px]">
-                {carData?.image_list.map((img, idx) => (
+                {carData?.image_list.length>0&&carData?.image_list.map((img, idx) => (
                   <img
                     key={img + idx}
                     src={img}
@@ -437,7 +437,7 @@ const CarDescription = () => {
                   backdrop-blur-[18.6px] max-w-[924px]">
           <div className="font-semibold text-base mb-4 font-['Poppins']">FEATURES</div>
           <div className="flex flex-wrap items-center gap-4 text-sm">
-            {carData.feature_list.map((feature, idx) => (
+            {carData?.feature_list.length>0&&carData?.feature_list.map((feature, idx) => (
               <React.Fragment key={feature}>
                 <div className="flex flex-wrap items-center gap-2">
                   <CheckIcon />

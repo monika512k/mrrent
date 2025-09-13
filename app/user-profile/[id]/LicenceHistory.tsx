@@ -25,7 +25,7 @@ const LicenceHistory = () => {
             let response = await licenceList() as any;
             if (response?.status) {
                 // Transform the API data to match the table structure
-                const transformedData = response.data.map((item:any, index:any) => ({
+                const transformedData = response.data.length>0&&response.data.map((item:any, index:any) => ({
                     id: item.id,
                     sNo: index + 1,
                     uploadedDate: new Date(item.created_at).toLocaleDateString(),

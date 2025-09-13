@@ -62,7 +62,7 @@ const About = () => {
           <div className="relative w-[275px] h-[582px] mx-auto">
             <div className="absolute rotate-90 w-[582px] h-[275px] left-[-151px] top-40 bg-gradient-to-b from-[rgba(243,183,83,0.1)] to-[rgba(235,233,230,0.1)] backdrop-blur-[18.6px] rounded-lg border border-yellow-500/30"></div>
             <div className="absolute w-[225px] h-[524px] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center gap-8">
-              {features.map((feature, index) => (
+              {features.length>0&&features.map((feature, index) => (
                 <div key={index} className="flex flex-col items-center gap-2">
                   <div>{feature.icon}</div>
                   <div className="text-[18px] font-semibold text-[#F6F6F6] text-center font-[Poppins] leading-[27px]">

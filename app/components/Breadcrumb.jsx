@@ -10,7 +10,7 @@ const Breadcrumb = ({ pages }) => {
             Home
           </a>
         </li>
-        {pages.map((page, index) => (
+        {pages.length>0&&pages.map((page, index) => (
           <li key={page.name} className="flex items-center">
             <ChevronRight className="h-4 w-4 mx-2" />
             <a

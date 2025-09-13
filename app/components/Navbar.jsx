@@ -75,7 +75,7 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center gap-6 text-white font-poppins font-semibold text-base">
           {/* Show navigation links only when not logged in */}
-          { navLinks.map((link, index) => (
+          { navLinks.length>0&&navLinks.map((link, index) => (
             <Link
               key={index}
               href={link.href}

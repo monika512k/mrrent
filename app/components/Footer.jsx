@@ -44,7 +44,7 @@ const Footer = () => {
             <div>
               <h3 className="font-semibold text-lg mb-4">{t('footer.company.title')}</h3>
               <ul className="space-y-2 text-sm text-[#D1D1D1]">
-                {companyLinks.map((link, index) => (
+                {companyLinks.length>0&&companyLinks.map((link, index) => (
                   <li key={index}>
                     <a href={link.href} className="hover:text-[#F3B753] transition-colors">
                       {link.label}
@@ -58,7 +58,7 @@ const Footer = () => {
             <div>
               <h3 className="font-semibold text-lg mb-4">{t('footer.services.title')}</h3>
               <ul className="space-y-2 text-sm text-[#D1D1D1]">
-                {serviceLinks.map((link, index) => (
+                {serviceLinks.length>0&&serviceLinks.map((link, index) => (
                   <li key={index}>
                     <a href={link.href} className="hover:text-[#F3B753] transition-colors">
                       {link.label}
@@ -72,7 +72,7 @@ const Footer = () => {
             <div>
               <h3 className="font-semibold text-lg mb-4">{t('footer.support.title')}</h3>
               <ul className="space-y-2 text-sm text-[#D1D1D1]">
-                {supportLinks.map((link, index) => (
+                {supportLinks.length>0&&supportLinks.map((link, index) => (
                   <li key={index}>
                     <a href={link.href} className="hover:text-[#F3B753] transition-colors">
                       {link.label}
@@ -87,7 +87,7 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start gap-4">
             <img src={assets.logo} alt={t('accessibility.logo')} className="w-16 h-16 object-contain" />
             <div className="flex gap-4">
-              {socialIcons.map(({ Icon, href, label }, index) => (
+              {socialIcons.length>0&&socialIcons.map(({ Icon, href, label }, index) => (
                 <a
                   key={index}
                   href={href}

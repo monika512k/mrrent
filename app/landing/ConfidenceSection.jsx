@@ -34,7 +34,7 @@ const ConfidenceSection = () => {
           {t('confidence.description')}
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-7xl mx-auto">
-          {features.map((feature, index) => (
+          {features.length>0&&features.map((feature, index) => (
             <div
               key={index}
               className="w-full p-4 sm:p-5 rounded-md border-2 shadow-md text-left transition-transform hover:scale-[1.02]"

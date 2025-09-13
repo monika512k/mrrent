@@ -199,7 +199,7 @@ const RentalHistory: React.FC<RentalHistoryProps> = ({
                             </button>
                         </div>
                     ) : (
-                        bookingData.map((booking) => {
+                        bookingData.length>0&&bookingData.map((booking) => {
                             const startDateTime = formatDateTime(booking.start_date);
                             const endDateTime = formatDateTime(booking.end_date);
                             const bookingDate = formatDate(booking.created_at);

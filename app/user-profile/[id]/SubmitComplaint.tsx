@@ -167,7 +167,7 @@ const SubmitComplaint = () => {
 
                 {isDropdownOpen && (
                   <div className="absolute top-full left-0 right-0 mt-1 bg-[#1a1a1a] border border-gray-600 rounded-lg z-10 max-h-60 overflow-y-auto">
-                    {categories.map((cat) => (
+                    {categories.length>0&&categories.map((cat) => (
                       <button
                         key={cat}
                         type="button"

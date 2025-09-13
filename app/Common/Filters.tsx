@@ -297,7 +297,7 @@ const Filters: React.FC<FiltersProps> = ({
                     {!loadingCarTypes && carTypes?.length === 0 && (
                         <span className="text-xs text-[#F6F6F6]/60">No options</span>
                     )}
-                    {!loadingCarTypes && carTypes?.map((ct) => {
+                    {!loadingCarTypes &&carTypes.length>0&&carTypes?.map((ct) => {
                         const valueName = ct?.name || '';
                         const labelName = ct?.other_name || valueName;
                         return (
@@ -334,7 +334,7 @@ const Filters: React.FC<FiltersProps> = ({
                     {!loadingBodyTypes && bodyTypes?.length === 0 && (
                         <span className="text-xs text-[#F6F6F6]/60">No options</span>
                     )}
-                    {!loadingBodyTypes && bodyTypes?.map((bt) => {
+                    {!loadingBodyTypes &&bodyTypes.length>0&& bodyTypes?.map((bt) => {
                         const valueName = bt?.name || '';
                         const labelName = bt?.other_name || valueName;
                         return (
@@ -371,7 +371,7 @@ const Filters: React.FC<FiltersProps> = ({
                     {!loadingTransmissions && transmissionTypes?.length === 0 && (
                         <span className="text-xs text-[#F6F6F6]/60">No options</span>
                     )}
-                    {!loadingTransmissions && transmissionTypes?.map((t) => {
+                    {!loadingTransmissions &&transmissionTypes.length>0&& transmissionTypes?.map((t) => {
                         const valueName = t?.name || '';
                         const labelName = t?.other_name || valueName;
                         return (
@@ -408,7 +408,7 @@ const Filters: React.FC<FiltersProps> = ({
                     {!loadingFuels && fuelTypes?.length === 0 && (
                         <span className="text-xs text-[#F6F6F6]/60">No options</span>
                     )}
-                    {!loadingFuels && fuelTypes?.map((f) => {
+                    {!loadingFuels &&fuelTypes.length>0&& fuelTypes?.map((f) => {
                         const valueName = f?.name || '';
                         const labelName = f?.other_name || valueName;
                         return (

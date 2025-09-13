@@ -126,7 +126,7 @@ const CarRentalGrid = ({ searchContext }) => {
                 </p>
 
                 <div className="flex flex-wrap justify-center mt-6 gap-3">
-                    {categories.map((label) => (
+                    {categories.length>0&&categories.map((label) => (
                         <button
                             key={label?.id}
                             onClick={() => handleCategoryClick(label?.name)}
