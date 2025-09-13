@@ -163,7 +163,7 @@ const CarListing = () => {
                 const res = await getCarsTypes({ used_for: 'filter', selected_language: String(language || 'en') }) as any;
                 if (res?.status && Array.isArray(res?.data)) {
                     // Keep both label and value: label = other_name, value = name
-                    const types = res.data.length>0&&res.data.map((ct: any) => ({
+                    const types = res?.data?.length>0&&res.data.map((ct: any) => ({
                         label: ct?.other_name || ct?.name,
                         value: ct?.name || ct?.other_name,
                     })).filter((x: any) => x?.value);
@@ -301,7 +301,7 @@ const CarListing = () => {
 
                 {/* Car Type Buttons */}
                 <div className="flex flex-wrap justify-center gap-4 mt-6 max-w-full overflow-x-auto">
-                    {carTypes.length>0&&carTypes.map((type) => (
+                    {carTypes?.length>0&&carTypes?.map((type) => (
                         <button
                             key={type.value}
                             onClick={() => {

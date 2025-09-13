@@ -187,7 +187,7 @@ const Filters: React.FC<FiltersProps> = ({
                 </button>
             </div>
             <div className="flex flex-wrap gap-2 mt-6">
-                {selectedCarTypes.length>0&&selectedCarTypes?.map((type: string) => (
+                {selectedCarTypes?.length>0&&selectedCarTypes?.map((type: string) => (
                     <div key={type} className="flex items-center gap-1 px-4 py-2 bg-[#454545]/30 border border-[#F6F6F6]/40 rounded-full opacity-40">
                         <span className="font-['Poppins'] font-medium text-sm text-[#F6F6F6]">{type}</span>
                         <svg width="19.2" height="19.2" viewBox="0 0 19.2 19.2" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -297,7 +297,7 @@ const Filters: React.FC<FiltersProps> = ({
                     {!loadingCarTypes && carTypes?.length === 0 && (
                         <span className="text-xs text-[#F6F6F6]/60">No options</span>
                     )}
-                    {!loadingCarTypes &&carTypes.length>0&&carTypes?.map((ct) => {
+                    {!loadingCarTypes &&carTypes?.length>0&&carTypes?.map((ct) => {
                         const valueName = ct?.name || '';
                         const labelName = ct?.other_name || valueName;
                         return (
@@ -334,7 +334,7 @@ const Filters: React.FC<FiltersProps> = ({
                     {!loadingBodyTypes && bodyTypes?.length === 0 && (
                         <span className="text-xs text-[#F6F6F6]/60">No options</span>
                     )}
-                    {!loadingBodyTypes &&bodyTypes.length>0&& bodyTypes?.map((bt) => {
+                    {!loadingBodyTypes &&bodyTypes?.length>0&& bodyTypes?.map((bt) => {
                         const valueName = bt?.name || '';
                         const labelName = bt?.other_name || valueName;
                         return (
@@ -371,7 +371,7 @@ const Filters: React.FC<FiltersProps> = ({
                     {!loadingTransmissions && transmissionTypes?.length === 0 && (
                         <span className="text-xs text-[#F6F6F6]/60">No options</span>
                     )}
-                    {!loadingTransmissions &&transmissionTypes.length>0&& transmissionTypes?.map((t) => {
+                    {!loadingTransmissions &&transmissionTypes?.length>0&& transmissionTypes?.map((t) => {
                         const valueName = t?.name || '';
                         const labelName = t?.other_name || valueName;
                         return (
@@ -408,7 +408,7 @@ const Filters: React.FC<FiltersProps> = ({
                     {!loadingFuels && fuelTypes?.length === 0 && (
                         <span className="text-xs text-[#F6F6F6]/60">No options</span>
                     )}
-                    {!loadingFuels &&fuelTypes.length>0&& fuelTypes?.map((f) => {
+                    {!loadingFuels &&fuelTypes?.length>0&& fuelTypes?.map((f) => {
                         const valueName = f?.name || '';
                         const labelName = f?.other_name || valueName;
                         return (

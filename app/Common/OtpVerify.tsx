@@ -141,7 +141,7 @@ const OtpVerification = ({ email }: OtpVerificationProps) => {
                   <OTPInputContext.Consumer>
                     {({ slots }) => (
                       <>
-                        {slots.length>0&&slots.map((slot, idx) => (
+                        {slots?.length>0&&slots.map((slot, idx) => (
                           <Slot key={idx} {...slot} />
                         ))}
                       </>

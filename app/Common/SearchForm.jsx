@@ -166,7 +166,7 @@ const SearchForm = ({ onSubmitOverride, locationList = [], title = "Search", src
                   value={selectedPickupLocationId || ''}
                 >
                   <option value=''>{t('hero.form.pickupLocation.placeholder')}</option>
-                  {pickupLocations.length>0&&pickupLocations.map((location) => (
+                  {pickupLocations?.length>0&&pickupLocations.map((location) => (
                     <option key={location.id} value={location.id}>
                       {location.address}
                     </option>
@@ -232,7 +232,7 @@ const SearchForm = ({ onSubmitOverride, locationList = [], title = "Search", src
                   value={selectedDropoffLocationId || 'default'}
                 >
                   <option value='default'>{t('hero.form.dropoffLocation.placeholder')}</option>
-                  {dropoffLocations.length>0&&dropoffLocations.map((location) => (
+                  {dropoffLocations?.length>0&&dropoffLocations.map((location) => (
                     <option key={location.id} value={location.id}>
                       {location.address}
                     </option>

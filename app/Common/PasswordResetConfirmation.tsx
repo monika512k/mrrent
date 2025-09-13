@@ -165,7 +165,7 @@ const PasswordResetConfirmation = ({ resetPswMail }: PasswordResetConfirmationPr
                   <OTPInputContext.Consumer>
                     {({ slots: contextSlots }) => (
                       <>
-                        {slots.length>0&&slots.map((slot, idx) => (
+                        {slots?.length>0&&slots.map((slot, idx) => (
                           <Slot key={idx} {...slot} />
                         ))}
                       </>

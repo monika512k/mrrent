@@ -75,7 +75,7 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center gap-6 text-white font-poppins font-semibold text-base">
           {/* Show navigation links only when not logged in */}
-          { navLinks.length>0&&navLinks.map((link, index) => (
+          { navLinks?.length>0&&navLinks.map((link, index) => (
             <Link
               key={index}
               href={link.href}
@@ -117,7 +117,7 @@ const Navbar = () => {
               {/* Dropdown Menu */}
               {dropdownOpen && (
                 <div className="absolute right-0 mt-2 w-64 bg-[#1a1a1a] outline outline-[0.5px] outline-[#F3B753] rounded-lg shadow-lg overflow-hidden">
-                  {dropdownItems.map((item, index) => (
+                  {dropdownItems?.map((item, index) => (
                     <Link
                       key={index}
                       href={item.href}
@@ -298,7 +298,7 @@ const Navbar = () => {
             <>
               {/* Show navigation links only when not logged in */}
               <div className="flex flex-col gap-6 px-6 text-lg font-semibold pt-4">
-                {navLinks.map((link, index) => (
+                {navLinks?.map((link, index) => (
                   <Link
                     key={index}
                     href={link.href}
