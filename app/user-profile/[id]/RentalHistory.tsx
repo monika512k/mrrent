@@ -135,7 +135,7 @@ const RentalHistory: React.FC<RentalHistoryProps> = ({
     }
 
     return (
-        <div className={`${bookingData.length === 0 ? "" : "max-w-4xl"} relative top-[50px]`}>
+        <div className={`${bookingData?.length === 0 ? "" : "max-w-4xl"} relative top-[50px]`}>
             {/* Header */}
             <div className="mb-8">
                 <h1 className="text-2xl font-semibold hidden md:block text-white">
@@ -175,7 +175,7 @@ const RentalHistory: React.FC<RentalHistoryProps> = ({
                         <div className="text-center py-12">
                             <p className="text-white">Loading...</p>
                         </div>
-                    ) : bookingData.length === 0 ? (
+                    ) : bookingData?.length === 0 ? (
                         <div className="text-center py-12 d-flex justify-center">
                             <img 
                                 src={assets.carImage} 
@@ -199,7 +199,7 @@ const RentalHistory: React.FC<RentalHistoryProps> = ({
                             </button>
                         </div>
                     ) : (
-                        bookingData.length>0&&bookingData.map((booking) => {
+                        bookingData?.length>0&&bookingData?.map((booking) => {
                             const startDateTime = formatDateTime(booking.start_date);
                             const endDateTime = formatDateTime(booking.end_date);
                             const bookingDate = formatDate(booking.created_at);
