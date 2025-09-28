@@ -138,15 +138,11 @@ const OtpVerification = ({ email }: OtpVerificationProps) => {
                 pushPasswordManagerStrategy="increase-width"
                 containerClassName="flex gap-3"
                 render={({ slots }) => (
-                  <OTPInputContext.Consumer>
-                    {({ slots }) => (
-                      <>
-                        {slots?.length>0&&slots.map((slot, idx) => (
-                          <Slot key={idx} {...slot} />
-                        ))}
-                      </>
-                    )}
-                  </OTPInputContext.Consumer>
+                  <>
+                    {slots.map((slot, idx) => (
+                      <Slot key={idx} {...slot} />
+                    ))}
+                  </>
                 )}
               />
             </div>

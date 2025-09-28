@@ -74,17 +74,18 @@ const Signup = () => {
       };
 
       const data = await signUpiApi(signupData as any) as { status: boolean, message?: string };
-     
+    
       if (data.status) {
         setOtp(true);
       } else {
         setError(data.message || '');
       }
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        console.error("Login error:", err.message);
-      }
-      setError(t('auth.errors.loginFailed'));
+    } catch (err: any) {
+     
+      
+       ToastMsg(err?.response?.data?.message||t('auth.errors.loginFailed'),"error")
+
+      
     } finally {
       setLoading('');
     }
